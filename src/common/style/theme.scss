@@ -1,0 +1,52 @@
+// 主颜色定义处
+$mainBackgroundWhite: #f7f7f7;
+$mainColorWhite: #2e2f36;
+$mainBorderWhite: #cccccc;
+
+$mainBackgroundBlack: #232426;
+$mainColorBlack: #a5a4a4;
+$mainBorderBlack: #000000;
+
+$color_font: #fafcff;
+$white: white;
+$black: black;
+$activeColor: #6f4fc9;
+$themes: (
+  white: (
+    mainBackground: $mainBackgroundWhite, // 主背景
+    mainColor: $mainColorWhite, // 主颜色
+    mainBorder: $mainBorderWhite, // 主边框
+    mainBorderDisabled: #cccccc, // 主边框禁用
+    boxBackground: #f0f0f0, // 盒子背景
+    boxHoverBackGround: #c2c5d1, // 盒子悬停
+    redDefalult: #e74c3c, // 红色悬停
+    redHover: #d64130, // 红色悬停
+    redDisabled: #f3a69e, // 红色禁用
+    blueDefalult: #3f85ff, // 蓝色悬停
+    blueHover: #2b77fc, // 蓝色悬停
+    blueDisabled: #9fc2ff, // 蓝色禁用
+    yellowDefalult: #f1c40d, // 蓝色悬停
+    yellowHover: #e9bd0c, // 蓝色悬停
+    yellowDisabled: #f8e286, // 蓝色禁用
+    activeColor: $activeColor
+  ),
+  black: (
+    mainBackground: $mainBackgroundBlack,
+    mainColor: $mainColorBlack,
+    mainBorder: $mainBorderBlack,
+    mainBorderDisabled: transparent, // 主边框禁用
+    boxBackground: #474a5c, // 盒子背景
+    boxHoverBackGround: #2e303b, // 盒子悬停
+    redDefalult: #e74c3c, // 红色悬停
+    redHover: #d64130, // 红色悬停
+    redDisabled: #f3a69e, // 红色禁用
+    blueDefalult: #3f85ff, // 蓝色悬停
+    blueHover: #2b77fc, // 蓝色悬停
+    blueDisabled: #9fc2ff, // 蓝色禁用
+    yellowDefalult: #f1c40d, // 蓝色悬停
+    yellowHover: #e9bd0c, // 蓝色悬停
+    yellowDisabled: #f8e286, // 蓝色禁用
+    activeColor: $activeColor
+  )
+);
+

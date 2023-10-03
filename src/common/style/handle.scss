@@ -1,0 +1,63 @@
+@import 'theme.scss';
+
+@mixin themeify {
+
+  @each $theme-name,
+  $theme-map in $themes {
+    $theme-map: $theme-map !global;
+
+    :host-context([data-theme="#{$theme-name}"]) & {
+      @content;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@mixin b($color) {
+  @include themeify {
+    background: themed($color);
+  }
+}
+
+@mixin c($color) {
+  @include themeify {
+    color: themed($color);
+  }
+}
+
+@mixin border($color) {
+  @include themeify {
+    border: 1px solid themed($color);
+  }
+}
+@mixin borderBottom($color) {
+  @include themeify {
+    border-bottom: 1px solid themed($color);
+  }
+}
+
+@mixin white {
+  :host-context([data-theme="white"]) & {
+    @content;
+  }
+}
+@mixin black {
+  :host-context([data-theme="black"]) & {
+    @content;
+  }
+}
+.main {
+  // @include white {
+  //   background-color: red!important;
+  // }
+  // @include black {
+  //   background-color: blue!important;
+  // }
+  @include b("mainBackground");
+  @include c("mainColor");
+  @include border("mainBorder");
+
+}
