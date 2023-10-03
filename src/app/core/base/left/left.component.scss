@@ -1,0 +1,20 @@
+
+// @import '../../../styles.scss';
+@import '../../../../common/style/handle.scss';
+.app-left {
+  @include white {
+    border-right: 1px solid $mainBorderWhite;
+  }
+  @include black {
+    border-right: 1px solid $mainBorderBlack;
+  }
+  
+}
+.app-left a {
+  display: block;
+}
+.app-left a .left-item-icon {
+  font-size: 48px;
+  transform: scale(0.6);
+  color: black;
+}

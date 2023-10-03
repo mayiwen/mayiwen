@@ -39,15 +39,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   async getTitle() {
     try {
+      console.log('开始获取')
       const title = await this.http.get('nav/title');
+      console.log('获取后的内容')
       console.log(title);
-      title.subscribe(res => {
+      title.subscribe({next:res => {
         if (Array.isArray(res) && res.length > 0) {
           console.log(res);
           this.titleList = res as any;
           this.getLinkById(res[0].id);
         }
-      });
+      } });
     } catch (err) {
       console.log(err);
     }
@@ -122,6 +124,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     console.log(e);
   }
   openOnBrowser(e: any) {
+    console.log('这是打印的')
+    console.log(e)
+    console.log(this.electron.shell)
     this.electron.shell.openExternal(e);
   }
 

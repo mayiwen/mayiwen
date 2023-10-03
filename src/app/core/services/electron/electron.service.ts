@@ -33,6 +33,7 @@ export class ElectronService {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.webFrame = window.require('electron').webFrame;
       this.app = window.require('electron').app;
+      this.shell = window.require('electron').shell;
       this.fs = window.require('fs');
       this.zlib = window.require('zlib');
       this.path = window.require('path');

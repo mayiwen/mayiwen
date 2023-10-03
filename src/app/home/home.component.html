@@ -32,7 +32,7 @@
       <div>
         <ul class="myw_list">
           <li class="active" *ngFor="let item of linkList; let i = index" [ngStyle]="{ width: liWidthComputer }">
-            <a (click)="openOnBrowser(item.src)" target="_blank"><button [title]="item.title">{{ item.title
+            <a (click)="openOnBrowser(item.src)"><button [title]="item.title">{{ item.title
                 }}</button></a>
           </li>
         </ul>
