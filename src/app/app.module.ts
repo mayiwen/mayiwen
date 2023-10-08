@@ -28,9 +28,10 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => new Transla
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    CoreModule,
     SharedModule,
     HomeModule,
+    MywModule,
+    CoreModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
@@ -39,8 +40,8 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => new Transla
         deps: [HttpClient]
       }
     }),
-    // BaseModule
-    // MywModule,
+    // BaseModule,
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

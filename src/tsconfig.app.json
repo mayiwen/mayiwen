@@ -5,7 +5,8 @@
     "baseUrl": "",
     "types": [
       "node"
-    ]
+    ],
+    "paths": { "@angular/*": [ "../node_modules/@angular/*" ] }
   },
   "files": [
     "main.ts",

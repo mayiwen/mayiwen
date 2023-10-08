@@ -65,6 +65,4 @@ export class LeftComponent implements OnInit, AfterViewInit {
       this.name = params['name'];
     });
   }
-  
-
 }
