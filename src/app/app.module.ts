@@ -40,7 +40,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => new Transla
         deps: [HttpClient]
       }
     }),
-    // BaseModule,
+    BaseModule,
 
   ],
   providers: [{
