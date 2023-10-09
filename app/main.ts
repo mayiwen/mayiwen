@@ -1,26 +1,37 @@
-import {app, BrowserWindow, screen} from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
-
-let win: BrowserWindow | null = null;
+import { ipc } from './ipc';
+// import { handleUpdate } from './update';
+// import { autoUpdater } from 'electron-updater'
+let win: BrowserWindow;
 const args = process.argv.slice(1),
-  serve = args.some(val => val === '--serve');
+  serve = args.some((val) => val === '--serve');
 
 function createWindow(): BrowserWindow {
-
   const size = screen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    x: (size.width - 800) / 2,
+    y: (size.height - 600) / 2,
+    width: 800,
+    height: 600,
+    minWidth: 400,
+    minHeight: 400,
+    // titleBarStyle: 'hidden',
+    // titleBarOverlay: {
+    //   color: '#fff',
+    //   symbolColor: 'black',
+    // },
+    frame: false, // 是否显示关闭按钮
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve),
-      contextIsolation: false,
+      allowRunningInsecureContent: serve,
+      contextIsolation: false, // false if you want to run e2e test with Spectron
+      webviewTag: true,
     },
+  
   });
 
   if (serve) {
@@ -34,22 +45,24 @@ function createWindow(): BrowserWindow {
     let pathIndex = './index.html';
 
     if (fs.existsSync(path.join(__dirname, '../dist/index.html'))) {
-       // Path when running electron in local folder
+      // Path when running electron in local folder
       pathIndex = '../dist/index.html';
     }
 
     const url = new URL(path.join('file:', __dirname, pathIndex));
     win.loadURL(url.href);
   }
-
+  ipc(win);
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store window
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    win = null;
+    win.close()
   });
-
+  // 与启动无关的方法
+  
+  // win.webContents.openDevTools({ mode: 'detach' });
   return win;
 }
 
@@ -77,7 +90,28 @@ try {
     }
   });
 
+  // 禁止可以打开多个实例
+  const gotTheLock = app.requestSingleInstanceLock();
+  if (!gotTheLock) {
+    app.quit();
+  }
+  {
+    app.on('second-instance', (event, argv) => {
+      if (process.platform === 'win32') {
+        if (win) {
+          if (win.isMinimized()) {
+            win.restore();
+          }
+          if (win.isVisible()) {
+            win.focus();
+          } else {
+            win.show();
+          }
+        }
+      }
+    });
+  }
 } catch (e) {
-  // Catch Error
-  // throw e;
+  console.error(e);
+  throw e;
 }
