@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { ElectronService } from '../../services';
+import { ElectronService } from '../../core/services';
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',

@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { CommonInterceptor } from './core/common/interceptor/CommonInterceptor';
 import { MywModule } from 'mayiwen_angular';
-import { BaseModule } from './core/base/base.module';
+import { BaseModule } from './base/base.module';
 import { RouterModule } from '@angular/router';
 
 // AoT requires an exported function for factories
