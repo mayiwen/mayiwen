@@ -9,6 +9,8 @@
   "main": "main.js",
   "private": true,
   "dependencies": {
+    "builder-util-runtime": "^9.2.1",
+    "electron-updater": "6.1.4",
     "install": "^0.13.0"
   }
 }
