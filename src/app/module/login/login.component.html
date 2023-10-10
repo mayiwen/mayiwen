@@ -1,0 +1,17 @@
+
+<h1 [title]="appService.token">{{ appService.token ? '登录成功' : '请登录' }}</h1>
+
+<div  [formGroup]="addOrEditForm">
+  <div style="line-height: 40px;">
+    <label >
+      用户名：<myw-input type="text" style="height: 24px" formControlName="name" name="name" w="150"></myw-input>
+    </label>
+  </div>
+  <div style="line-height: 40px;">
+    <label >
+      <span (click)="type === 'password' ? type = 'text': type = 'password'"> 密  码：</span>
+      <myw-input w="150"  style="height: 24px" formControlName="password" name="password" > </myw-input>
+    </label>
+  </div>
+</div>
+<myw-button  (click)="login()">登录</myw-button>

@@ -1,0 +1,25 @@
+
+<div style="min-height: calc(100% - 30px); min-width: 100%;" (dragover)="dragDefault($event)" (drop)="containerDrop($event)">
+  <!-- <myw-tabs>
+    <myw-tabset [mywTitle]="tab.v" *ngFor="let tab of desktopArr ; let tabIndex = index" > -->
+      <ng-container *ngFor="let tab of desktopArr ; let tabIndex = index">
+      <div class="container-box"   #containerRef  >
+            <div class="img-box" *ngFor="let item of tab.children; let index = index" (contextmenu)="deleteButtonShowOrHidden(item, tabIndex, index)" (click)="openFile(item)" 
+              [draggable]="true" (dragstart)="dragStart(item, index, tabIndex)" (dragover)="dragDefault($event)" (drop)="linkDrop($event, item, index, tabIndex)">
+              <div class="img-box-top" [title]="item.value">
+                <img [src]="item.img" class="img-box-top-img"  ></div>
+              <div class="img-box-bottom">
+                {{item.v}}
+                <div class="img-box-bottom-button-div" *ngIf="item.flagShowDelete">
+                  <myw-button w="80" class="img-box-bottom-button-button" (click)="deleteItem($event, item, tabIndex, index)"  >删除</myw-button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </ng-container>
+   
+    <!-- </myw-tabset>
+  </myw-tabs> -->
+</div>
+
+

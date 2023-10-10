@@ -1,0 +1,11 @@
+<p>当前功能暂未实现</p>
+<p>先通过登录鉴权后再操作：</p>
+<p>1：latest.yml</p>
+<p>2：exe文件（如“mayiwen-Setup-0.2.6.exe”）</p>
+<p>3：blockmap（如“mayiwen-Setup-0.2.6.exe.blockmap”）</p>
+<p>需留意latest.yml与两个文件的对应关系。</p>
+<p>请选择多个文件上传：</p>
+<form  >    
+  <input type="file" name="file" id="" multiple [(ngModel)]="file" (click)="uploadFileChange($event)"/>
+  <input type="submit" value="提交" (click)="upload()">        
+</form>

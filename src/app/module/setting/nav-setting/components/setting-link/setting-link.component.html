@@ -1,0 +1,38 @@
+<p>先通过登录鉴权后再操作：</p>
+<form action="" [formGroup]="addOrEditForm" style="margin-top: 3px;">
+  <myw-select formControlName="selectObj" (optionSelect)="changeSelect($event)">
+    <myw-option [o]="item" *ngFor="let item of tableDate;" ></myw-option>
+  </myw-select>
+  <myw-input formControlName="title" name="title" w="150" placeholder="输入标题" ></myw-input>
+  <myw-input formControlName="url" name="url" w="150" placeholder="输入url"> </myw-input>
+  <myw-button (click)="add()">添加</myw-button>
+  <myw-button (click)="reset()">重置</myw-button>
+  <myw-button (click)="print()">打印</myw-button>
+</form>
+
+<div style="width: 800px; margin-top: 30px;">
+  <p *ngFor="let item of linkList; let index = index"
+    style="border: 1px solid rgb(247, 219, 219); line-height: 30px; margin-top: -20px; margin: -1px;" [draggable]="true"
+    (dragstart)="dragStart(item, index)" (dragenter)="dragenter($event)" (dragleave)="dragleave($event)"
+    (dragover)="dragover($event)" (drop)="dropInner($event, item, index)">
+    <span style="width: 60px;display: inline-block;  vertical-align: middle;">
+      {{item.id}}
+    </span>
+    <span style="width: 40px;display: inline-block; overflow: hidden; vertical-align: middle;" class="ellipsis"
+      (click)="delete(item)">
+      删除
+    </span>
+    <span style="width: 40px;display: inline-block; overflow: hidden; vertical-align: middle;" class="ellipsis"
+      (click)="editBefore(item)">
+      修改
+    </span>
+    <span style="width: 200px;display: inline-block; overflow: hidden; vertical-align: middle" [title]="item.title"
+      class="ellipsis">
+      {{item.title}}
+    </span>
+    <span style="width: 425px;display: inline-block; overflow: hidden; vertical-align: middle" [title]="item.src"
+      class="ellipsis">
+      {{item.src}}
+    </span>
+  </p>
+</div>

@@ -1,0 +1,19 @@
+<H1 style="text-align: center">rgb 与 十六进制 互转</H1>
+输入rgb
+<br />
+<myw-input type="number" [(ngModel)]="r" title="0-255" reg="/^([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|(25[0-5]))$/"></myw-input>
+<!-- reg="/^([1-9][0-9]|100|0|[1-9])$/" -->
+<myw-input type="number" [(ngModel)]="g" title="0-255" reg="/^([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|(25[0-5]))$/"></myw-input>
+<myw-input type="number" [(ngModel)]="b" title="0-255" reg="/^([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|(25[0-5]))$/"></myw-input>
+<myw-button (click)="rgbToHex()">转换</myw-button>
+
+<br>
+<p>结果显示 {{rth}}</p>
+<div style="height: 30px; width: 500px;" [ngStyle]="{'background-color': rth}"></div>
+<div style="height: 30px;"></div>
+
+<myw-input [(ngModel)]="str" reg="/^([0-9a-f]{0,6})$/" w="80"></myw-input> 
+<myw-button (click)="hexToRgb()">转换</myw-button>
+<br>
+{{rgbstr}}
+<div style="height: 30px; width: 500px;" [ngStyle]="{'background-color': rgbstr}"></div>

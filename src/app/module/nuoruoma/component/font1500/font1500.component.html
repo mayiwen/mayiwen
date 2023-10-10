@@ -1,0 +1,14 @@
+<myw-gap></myw-gap>
+<myw-button>将数据写入数据库1</myw-button>
+<myw-gap></myw-gap>
+<myw-table [tableCol]="tableHead" [tableData]="arr" >
+    <ng-template mywTable="show2" #show2 let-item>
+        <myw-button (click)="showtest(item)">显示</myw-button>
+     </ng-template>
+</myw-table>
+<myw-gap></myw-gap>
+<myw-page [mywPage]="page" (changePage)="changePageFn($event)"></myw-page>
+<myw-gap></myw-gap>
+在表格展示大量数据的时候，可以考虑虚拟滚动实现。在myw-table中添加虚拟滚动。
+IntersectionObserver API 可以判断该元素在不在视口区域。
+<myw-gap></myw-gap>

@@ -1,0 +1,27 @@
+
+<div style="padding: 10px;">
+  <myw-tabs [(ngModel)]="tabIndex" ngDefaultControl >
+    <myw-tabset v="技术实验" (tabClick)="tabClick($event)">
+        <app-test-1000 ></app-test-1000>
+    </myw-tabset>
+    <myw-tabset v="登录" (click)="toroute()" [routerLink]="['login']">
+        <router-outlet  ></router-outlet>
+    </myw-tabset>
+    <myw-tabset v="首页链接">
+      <ng-template mywTabSet>
+        <app-setting-link ></app-setting-link>
+      </ng-template>
+    </myw-tabset>
+    <myw-tabset v="首页标题">
+      <ng-template mywTabSet>
+        <app-setting-title ></app-setting-title>
+      </ng-template>
+    </myw-tabset>
+    <myw-tabset v="新版发布">
+      <app-update ></app-update>
+    </myw-tabset>
+    <myw-tabset v="升级/关于">
+      <app-setting-abuot ></app-setting-abuot>
+    </myw-tabset>
+  </myw-tabs>
+</div>

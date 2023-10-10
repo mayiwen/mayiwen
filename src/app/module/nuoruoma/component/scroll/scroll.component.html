@@ -1,0 +1,7 @@
+<div class="container">
+    <div #hello *ngFor="let item of arr; let index = index" [attr.data-index]="index">
+      <ng-container *ngIf="item.show">
+        {{item.value}}
+      </ng-container>
+    </div>
+  </div>

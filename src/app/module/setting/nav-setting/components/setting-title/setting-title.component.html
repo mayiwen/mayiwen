@@ -1,0 +1,33 @@
+<p>先通过登录鉴权后再操作：</p>
+<!-- 头部的添加修改等操作 -->
+<div style="margin-top: 10px;">
+  <myw-button (click)="addBefore()">添加</myw-button>
+</div>
+<myw-table [tableCol]="tableHead" [tableData]="tableDate">
+  <ng-template mywTable #editRef let-item>
+    <myw-button (click)="edit1(item)">修改</myw-button>
+    <myw-button t="red" (click)="delete(item)" style="margin-left: 5px;">删除</myw-button>
+  </ng-template>
+</myw-table>
+
+<!-- '这是添加或修改的' -->
+<myw-modal *ngIf="modal" [w]="600" [h]="250" (close)="close()">
+  <ng-template mywModalHeader>
+    {{'标题操作 - ' + flagAddOrUpdate ? '添加' : '修改'}}
+  </ng-template>
+  <ng-template mywModalSection>
+    <div style="padding: 10px;">
+      <form [formGroup]="addOrEditForm">
+        <myw-input type="text" formControlName="id" placeholder="请输入id的内容" *ngIf="!flagAddOrUpdate" [disabled]="true"
+          w="200"></myw-input>
+        <div style="margin-top: 10px;"></div>
+        <myw-input type="text" placeholder="请输入标题的内容" formControlName="title" w="200"></myw-input>
+      </form>
+    </div>
+  </ng-template>
+  <ng-template mywModalFooter>
+    <myw-button style="margin-right: 10px;" (click)="addItem()" *ngIf="flagAddOrUpdate">添加</myw-button>
+    <myw-button style="margin-right: 10px;" (click)="editItem()" *ngIf="!flagAddOrUpdate">修改</myw-button>
+    <myw-button (click)="close()">返回</myw-button>
+  </ng-template>
+</myw-modal>

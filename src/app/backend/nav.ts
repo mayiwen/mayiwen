@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 export class BackendNavService {
   constructor(private http: HttpClient) { }
   linkTitle(): Observable<any> { return this.http.get('link'); }
-  linkTitlePost(title): Observable<any> { return this.http.post('link', { title }); };
-  linkTitleDelete(id): Observable<any> { return this.http.delete('link/' + id,); };
-  linkTitlePacch(id, title): Observable<any> { return this.http.patch('link/' + id, { title }); };
-  linkLink(id): Observable<any> { return this.http.get('link/link?id=' + id); }
-  linkLinkSave(data): Observable<any> { return this.http.post('link/link', data); }
-  linkLinkDeleteById(id): Observable<any> { return this.http.delete('link/link/' + id); }
-  patchLinkAll(list): Observable<any> { return this.http.post('link/link/all', list); };
+  linkTitlePost(title: any): Observable<any> { return this.http.post('link', { title }); };
+  linkTitleDelete(id: any): Observable<any> { return this.http.delete('link/' + id,); };
+  linkTitlePacch(id: any, title: any): Observable<any> { return this.http.patch('link/' + id, { title }); };
+  linkLink(id: any): Observable<any> { return this.http.get('link/link?id=' + id); }
+  linkLinkSave(data: any): Observable<any> { return this.http.post('link/link', data); }
+  linkLinkDeleteById(id: any): Observable<any> { return this.http.delete('link/link/' + id); }
+  patchLinkAll(list: any): Observable<any> { return this.http.post('link/link/all', list); };
 }
 
