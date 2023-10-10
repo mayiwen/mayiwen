@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MindMapService } from './mind-map.service';
 import { ElectronService } from '../../core/services';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid  } from 'nanoid';
 import { TreeI } from './module/treemap/o/tree-item.i';
 import { WangEditorComponent } from './editor/wangeditor/wangeditor.component';
 import { FileService } from '../common/file/service/file.service';
@@ -26,7 +26,7 @@ export class MindMapComponent implements OnInit, AfterViewInit {
     {
       v: '1',
       value: '1',
-      uuid: uuidv4(),
+      uuid: nanoid(),
     },
   ];
   file = {

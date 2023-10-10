@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TreeI } from './o/tree-item.i';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 import { MindMapService } from '../../mind-map.service';
 import { MywAlertService, MywMessageService } from 'mayiwen_angular';
 @Component({
@@ -89,14 +89,14 @@ export class TreeMapComponent
       this.fatherNgModel[index].children.push({
         v: '',
         value: '',
-        uuid: uuidv4(),
+        uuid: nanoid(),
       });
     } else {
       this.fatherNgModel[index].children = [
         {
           v: '',
           value: '',
-          uuid: uuidv4(),
+          uuid: nanoid(),
         },
       ];
     }
@@ -105,14 +105,14 @@ export class TreeMapComponent
     this.fatherNgModel.splice(index, 0, {
       v: '',
       value: '',
-      uuid: uuidv4(),
+      uuid: nanoid(),
     });
   }
   addYoungerBrother(index: any) {
     this.fatherNgModel.splice(index + 1, 0, {
       v: '',
       value: '',
-      uuid: uuidv4(),
+      uuid: nanoid(),
     });
   }
   addFather(index: any) {
@@ -120,7 +120,7 @@ export class TreeMapComponent
     this.fatherNgModel[index].v = '';
     this.fatherNgModel[index].value = '';
     this.fatherNgModel[index].children = [copy];
-    this.fatherNgModel[index].uuid = uuidv4();
+    this.fatherNgModel[index].uuid = nanoid();
   }
   delete(index: any, item: any) {
     this.alert.show({

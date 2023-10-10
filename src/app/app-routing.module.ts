@@ -19,10 +19,10 @@ const routes: Routes = [
     path: 'desktop',
     loadChildren: () => import('./module/desktop/desktop.module').then((x) => x.DesktopModule)
   },
-  // {
-  //   path: 'mind-map',
-  //   loadChildren: () => import('./module/mind-map/mind-map.module').then((x) => x.MindMapModule)
-  // },
+  {
+    path: 'mind-map',
+    loadChildren: () => import('./module/mind-map/mind-map.module').then((x) => x.MindMapModule)
+  },
   {
     path: 'util',
     loadChildren: () => import('./module/util/util.module').then((x) => x.UtilModule)
