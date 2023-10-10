@@ -30,7 +30,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   });
   dropSaveIndex = 0;
   public tableDate = []; // 表格的数据
-  public linkList = [];
+  public linkList = [] as any;
   public selectObj = {} as any;
   tableSetting = {
     tableHead: [
@@ -71,7 +71,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     window.onresize = () => {};
   }
   getTableData() {
-    this.titleService.listTitle().subscribe((res) => {
+    this.titleService.listTitle().subscribe((res: any) => {
       this.tableDate = res.map((item: any) => { return {value: item.id, v: item.title}});
       console.log('这是初始化的tableData')
       console.log(this.tableDate)
@@ -86,7 +86,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     });
   }
   getLinkById(titleid: any) {
-    this.linkService.findOneLink(titleid).subscribe((res) => {
+    this.linkService.findOneLink(titleid).subscribe((res: any) => {
       console.log('这是打印的');
       console.log(res);
       this.linkList = res;
@@ -165,7 +165,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
         id: itemi.id,
       };
     });
-    this.linkService.updateLinkList(list).subscribe((res) => {
+    this.linkService.updateLinkList(list).subscribe((res: any) => {
       console.log(res);
       this.getLinkById(this.selectObj.value);
     });
@@ -196,7 +196,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
         indexLink: 999999999
       }
       console.log(params);
-      this.linkService.addLink(params).subscribe(res => {
+      this.linkService.addLink(params).subscribe((res: any) => {
         this.getLinkById(this.addOrEditForm.getRawValue().selectObj.value);
       })
     }
@@ -215,12 +215,12 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
         console.log('这是弹出的')
         this.linkService.deleteLink(this.deleteObj.id).subscribe(
           {
-            next: (res) => {
+            next: (res: any) => {
               console.log('这是res打印的内容')
               console.log(res)
               this.getLinkById(this.addOrEditForm.getRawValue().selectObj.value);
             },
-            error: (error) => {
+            error: (error: any) => {
               console.log('这是打印的error')
               console.log(error)
               this.message.show(error.message)
