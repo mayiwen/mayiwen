@@ -1,11 +1,21 @@
 {
-  "name": "angular-electron",
-  "version": "13.0.0",
-  "description": "Angular 16 with Electron 25 (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "mayiwen",
+  "version": "0.3.60",
+  "description": "mayiwen for windows",
+  "homepage": "http://mayiwen.com",
   "author": {
-    "name": "Maxime GRIS",
+    "name": "mayiwen",
     "email": "maxime.gris@gmail.com"
+  },
+  "baseAuthor": {
+    "name": "angular-electron",
+    "version": "13.0.0",
+    "description": "Angular 16 with Electron 25 (Typescript + SASS + Hot Reload)",
+    "homepage": "https://github.com/maximegris/angular-electron",
+    "author": {
+      "name": "Maxime GRIS",
+      "email": "maxime.gris@gmail.com"
+    }
   },
   "keywords": [
     "angular",
@@ -27,6 +37,7 @@
     "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
     "start": "npm-run-all -p electron:serve ng:serve",
+    "s": "npm-run-all -p electron:serve ng:serve",
     "ng:serve": "ng serve -c web -o",
     "build": "npm run electron:serve-tsc && ng build --base-href ./",
     "build:dev": "npm run build -- -c dev",

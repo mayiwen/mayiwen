@@ -1,11 +1,16 @@
 {
-  "name": "angular-electron",
+  "name": "mayiwen",
   "description": "Angular Electron sample",
   "author": {
+    "name": "mayiwen",
+    "email": "i@mayiwen.com"
+  },
+  "baseAuthor": {
+    "projectName": "angular-electron",
     "name": "Maxime GRIS",
     "email": "maxime.gris@gmail.com"
   },
-  "version": "13.0.0",
+  "version": "0.3.60",
   "main": "main.js",
   "private": true,
   "dependencies": {
