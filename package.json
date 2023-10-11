@@ -60,12 +60,10 @@
     "compressing": "1.10.0",
     "electron": "26.2.4",
     "electron-updater": "6.1.4",
-    "event-emitter": "0.3.5",
     "mayiwen_angular": "0.0.2",
     "nanoid": "5.0.1",
     "rxjs": "7.8.1",
     "tslib": "^2.5.0",
-    "uuid": "9.0.1",
     "zone.js": "~0.13.1"
   },
   "devDependencies": {

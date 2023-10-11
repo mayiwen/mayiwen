@@ -27,7 +27,7 @@ export function ipc(win: any) {
     win.webContents.openDevTools({ mode: 'detach' });
   });
   // 获取图标的软件
-  ipcMain.on('imgIcon', async (event: any, params) => {
+  ipcMain.on('imgIcon', async (event: any, params: any) => {
     try {
       if (params.value.includes('.lnk')) {
         let lnk = shell.readShortcutLink(params.value);
@@ -45,14 +45,14 @@ export function ipc(win: any) {
   });
   handleUpdate(autoUpdater, win)
   // 获取路径 
-  ipcMain.on('electronAppPathUserData',  (event: any, params) => {
+  ipcMain.on('electronAppPathUserData',  (event: any, params: any) => {
     let path =  app.getPath('userData');
     win.webContents.send('electronAppPathUserDataReturn', path)
     let desktop = app.getPath('desktop')
     win.webContents.send('electronAppPathDesktopReturn', desktop)
   });
    // 获取路径 
-  ipcMain.on('checkForUpdate', async (event: any, params) => {
+  ipcMain.on('checkForUpdate', async (event: any, params: any) => {
     console.log('this is update message')
     // console.log(event)
     let res = await autoUpdater.checkForUpdates();
