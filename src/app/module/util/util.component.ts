@@ -20,7 +20,7 @@ export class UtilModuleUtilComponent implements OnInit, AfterViewInit {
 
   }
   ngOnInit(): void {
-    this.hello(2)
+    this.hello(0)
   }
   hello(e: any) {
     if (e === 0) {
