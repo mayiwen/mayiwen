@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./module/nuoruoma/nuoruoma.module').then((x) => x.NuoruomaModule)
   },
   {
-    path: 'myw',
-    loadChildren: () => import('mayiwen_angular').then((x) => x.MywModule)
-  },
-  {
     path: '**',
     component: PageNotFoundComponent
   }

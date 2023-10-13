@@ -10,7 +10,7 @@
     "name": "Maxime GRIS",
     "email": "maxime.gris@gmail.com"
   },
-  "version": "0.3.62",
+  "version": "0.3.63",
   "main": "main.js",
   "private": true,
   "dependencies": {
