@@ -4,7 +4,7 @@
   <myw-button (click)="addBefore()">添加</myw-button>
 </div>
 <myw-table [tableCol]="tableHead" [tableData]="tableDate">
-  <ng-template mywTable #editRef let-item>
+  <ng-template mywTable select="editRef" let-item>
     <myw-button (click)="edit1(item)">修改</myw-button>
     <myw-button t="red" (click)="delete(item)" style="margin-left: 5px;">删除</myw-button>
   </ng-template>
