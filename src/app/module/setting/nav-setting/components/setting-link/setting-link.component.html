@@ -7,10 +7,14 @@
   <myw-input formControlName="url" name="url" w="150" placeholder="输入url"> </myw-input>
   <myw-button (click)="add()">添加</myw-button>
   <myw-button (click)="reset()">重置</myw-button>
-  <!-- <myw-button (click)="print()">打印</myw-button> -->
 </form>
-
-<div style="width: 800px; margin-top: 30px;">
+<myw-table [tableCol]="tableCol" [tableData]="tableData" (dragAfter)="dragafter($event)">
+  <ng-template mywTable select="edit" let-item>
+    <myw-button (click)="editBefore(item)">修改</myw-button> | 
+    <myw-button t="red" (click)="deleteFn(item)">删除</myw-button>
+  </ng-template>
+</myw-table>
+<!-- <div style="width: 800px; margin-top: 30px;">
   <p *ngFor="let item of linkList; let index = index"
     style="border: 1px solid rgb(247, 219, 219); line-height: 30px; margin-top: -20px; margin: -1px;" [draggable]="true"
     (dragstart)="dragStart(item, index)" (dragenter)="dragenter($event)" (dragleave)="dragleave($event)"
@@ -35,4 +39,4 @@
       {{item.src}}
     </span>
   </p>
-</div>
+</div> -->

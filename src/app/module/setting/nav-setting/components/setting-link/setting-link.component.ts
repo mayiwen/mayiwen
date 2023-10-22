@@ -53,6 +53,32 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       },
     ],
   };
+
+  tableCol= [
+
+    {
+      v: '序号',
+      value: 'id',
+      w: 100
+    },
+    {
+      v: '操作',
+      value: 'edit',
+      w: 120
+    },
+    {
+      value: 'title',
+      v: '标题',
+      w: 200,
+    },
+    {
+      value: 'src',
+      v: '链接地址',
+      w: 500,
+    },
+   
+  ]
+  tableData = []
   deleteObj = {} as any
   modal: boolean =  true // 弹出窗是否显示
   constructor(
@@ -71,8 +97,12 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     window.onresize = () => {};
   }
   getTableData() {
+    console.log('这是打印的内容')
     this.titleService.listTitle().subscribe((res: any) => {
+      console.log('这是打印的res')
+      console.log(res)
       this.tableDate = res.map((item: any) => { return {value: item.id, v: item.title}});
+ 
       console.log('这是初始化的tableData')
       console.log(this.tableDate)
       this.addOrEditForm.controls.selectObj.setValue({
@@ -89,7 +119,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     this.linkService.findOneLink(titleid).subscribe((res: any) => {
       console.log('这是打印的');
       console.log(res);
-      this.linkList = res;
+      this.tableData = res
     });
   }
   changeSelect(e: any) {
@@ -98,9 +128,6 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     this.getLinkById(e.value);
   }
   dragStart(item: any, index: any, flag?: boolean) {
-    console.log('drag start');
-    console.log(item);
-    console.log(index);
     this.dropSaveIndex = index;
     // this.drapType = 'm';
   }
@@ -144,32 +171,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     //   this.localStorageSet();
     // });
   }
-  dropInner(e: any, item: any, index: any) {
-    e.preventDefault();
-    console.log('这是拖进的');
-    console.log(item, index);
-    console.log('这是拖动的');
-    console.log(this.dropSaveIndex);
-    console.log('进入了1');
-    console.log('dropInner');
-    console.log(e, item, index);
-    const itemSave = this.linkList[this.dropSaveIndex];
-    this.linkList.splice(this.dropSaveIndex, 1);
-    this.linkList.splice(index, 0, itemSave);
-    let list = [...this.linkList].map((itemi: any, index) => {
-      return {
-        indexLink: index,
-        titleId: itemi.title_id,
-        title: itemi.title,
-        src: itemi.src,
-        id: itemi.id,
-      };
-    });
-    this.linkService.updateLinkList(list).subscribe((res: any) => {
-      console.log(res);
-      this.getLinkById(this.selectObj.value);
-    });
-  }
+  
   /**
    * 重置添加的数据
    */
@@ -203,7 +205,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
    
   }
 
-  delete(item: any) {
+  deleteFn(item: any) {
     console.log('这是待删除的对象');
     console.log(item);
     this.deleteObj = item
@@ -234,7 +236,9 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   deleteClick() {
     
   }
-  editBefore(e: any) {}
+  editBefore(e: any) {
+    console.log('调用了')
+  }
 
   optionSelect(e: any) {
     console.log('这是获取的option select 外部')
@@ -242,5 +246,33 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   }
   print() {
     console.log(this.addOrEditForm)
+  }
+  dragafter(e: any) {
+    console.log('拖动的执行了')
+    console.log(e)
+    this.dropInner(e.dragIndex,e.dropIndex)
+  }
+  dropInner(dragIndex: number,dropIndex: number) {
+    console.log('进入了里面')
+    console.log(dragIndex)
+    console.log(dropIndex)
+    const itemSave = this.tableData[dragIndex];
+    this.tableData.splice(dragIndex, 1);
+    this.tableData.splice(dropIndex, 0, itemSave);
+    console.log('这是打印的 list之前')
+    let list = [...this.tableData].map((itemi: any, index) => {
+      return {
+        indexLink: index,
+        titleId: itemi.title_id,
+        title: itemi.title,
+        src: itemi.src,
+        id: itemi.id,
+      };
+    });
+    console.log(list)
+    this.linkService.updateLinkList(list).subscribe((res: any) => {
+      console.log(res);
+      this.getLinkById(this.selectObj.value);
+    });
   }
 }
