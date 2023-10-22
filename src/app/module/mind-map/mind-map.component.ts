@@ -217,7 +217,7 @@ export class MindMapComponent implements OnInit, AfterViewInit {
     }
     let jsonPath = this.es.path.join(signalPath, 'index.json');
     this.es.fs.writeFileSync(jsonPath, JSON.stringify(exportData));
-    console.log(this.message.show('更新树数据成功'))
+    // console.log(this.message.show('更新树数据成功'))
   }
 
   /** 保存下方的内容 */
@@ -237,7 +237,7 @@ export class MindMapComponent implements OnInit, AfterViewInit {
       console.log('写入文件')
       console.log(txt)
       this.es.fs.writeFileSync(this.es.path.join(uuidPath, 'index.txt'), txt);
-      this.message.show('保存文件成功    ' + this.selectTreeI.v + '    富文本文档')
+      // this.message.show('保存文件成功    ' + this.selectTreeI.v + '    富文本文档')
   }
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
