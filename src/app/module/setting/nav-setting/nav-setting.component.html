@@ -5,16 +5,24 @@
         <router-outlet  ></router-outlet>
     </myw-tabset>
     <myw-tabset v="首页链接">
+      <ng-template mywTabSet>
         <app-setting-link ></app-setting-link>
+      </ng-template>
     </myw-tabset>
     <myw-tabset v="首页标题">
+      <ng-template mywTabSet>
         <app-setting-title ></app-setting-title>
+      </ng-template>
     </myw-tabset>
     <myw-tabset v="新版发布">
-      <app-update ></app-update>
+      <ng-template mywTabSet>
+        <app-update ></app-update>
+      </ng-template>
     </myw-tabset>
     <myw-tabset v="升级/关于">
-      <app-setting-abuot ></app-setting-abuot>
+      <ng-template mywTabSet>
+        <app-setting-abuot ></app-setting-abuot>
+      </ng-template>
     </myw-tabset>
   </myw-tabs>
 </div>
