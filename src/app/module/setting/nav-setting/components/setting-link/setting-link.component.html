@@ -1,37 +1,53 @@
 <p>先通过登录鉴权后再操作：</p>
 <form action="" [formGroup]="addOrEditForm" style="margin-top: 3px;">
   <myw-select formControlName="selectObj" (optionSelect)="changeSelect($event)">
-    <myw-option [o]="item" *ngFor="let item of tableDate;" ></myw-option>
+    <myw-option [o]="item" *ngFor="let item of tableDate;"></myw-option>
   </myw-select>
-  <myw-input formControlName="title" name="title" w="150" placeholder="输入标题" ></myw-input>
+  <myw-input formControlName="title" name="title" w="150" placeholder="输入标题"></myw-input>
   <myw-input formControlName="url" name="url" w="150" placeholder="输入url"> </myw-input>
   <myw-button (click)="add()">添加</myw-button>
   <myw-button (click)="reset()">重置</myw-button>
 </form>
 <myw-table [tableCol]="tableCol" [tableData]="tableData" (dragAfter)="dragafter($event)">
   <ng-template mywTable select="edit" let-item>
-    <myw-button (click)="editBefore(item);">修改</myw-button> | 
+    <myw-button (click)="editBefore(item);">修改</myw-button> |
     <myw-button t="red" (click)="deleteFn(item)">删除</myw-button>
   </ng-template>
 </myw-table>
 <!-- '这是添加或修改的' -->
 <myw-modal *ngIf="modal" [w]="600" [h]="250" (close)="modal = false">
   <ng-template mywModalHeader>
-    {{'标题操作 - ' +  '修改'}}
+    {{'标题操作 - ' + '修改'}}
   </ng-template>
   <ng-template mywModalSection>
     <div style="padding: 10px;">
-      <form [formGroup]="addOrEditForm">
+      <!-- {{mywForm | json}} -->
+      <form [formGroup]="mywForm">
         <!-- <myw-input type="text" formControlName="id" placeholder="请输入id的内容" *ngIf="!flagAddOrUpdate" [disabled]="true"
           w="200"></myw-input> -->
         <div style="margin-top: 10px;"></div>
-        <myw-input type="text" placeholder="请输入标题的内容" formControlName="title" w="200"></myw-input>
+        <div>
+          <myw-input type="text" placeholder="id" formControlName="id" name="id" w="200" [disabled]="true"></myw-input>
+        </div>
+        <div>
+          <myw-input type="text" placeholder="标题id" formControlName="title_id" name="title_id" w="200" [disabled]="true"></myw-input>
+        </div>
+        <div>
+          <myw-input type="text" placeholder="标题" formControlName="title" name="title" w="200"></myw-input>
+        </div>
+        <div>
+          <myw-input type="text" placeholder="src" formControlName="src" w="200" name="src"></myw-input>
+        </div>
+        <div>
+          <myw-input type="text" placeholder="indexLink" formControlName="indexLink" w="200" name="indexLink" [disabled]="true"></myw-input>
+        </div>
       </form>
     </div>
   </ng-template>
   <ng-template mywModalFooter>
     <!-- <myw-button style="margin-right: 10px;" (click)="addItem()" *ngIf="flagAddOrUpdate">添加</myw-button>
-    <myw-button style="margin-right: 10px;" (click)="editItem()" *ngIf="!flagAddOrUpdate">修改</myw-button> -->
+     -->
+    <myw-button style="margin-right: 10px;" (click)="editClick()">修改</myw-button>
     <myw-button (click)="modal = false">返回</myw-button>
   </ng-template>
 </myw-modal>

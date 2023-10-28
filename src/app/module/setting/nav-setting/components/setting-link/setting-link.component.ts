@@ -28,6 +28,13 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       v: ''
     })
   });
+  mywForm = this.fb.group({
+    id: ['', Validators.required],
+    title_id: [0, Validators.required],
+    title: ['', Validators.required],
+    src: ['', Validators.required],
+    indexLink: [0, Validators.required],
+  });
   dropSaveIndex = 0;
   public tableDate = []; // 表格的数据
   public linkList = [] as any;
@@ -64,6 +71,11 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       v: '操作',
       value: 'edit',
       w: 120
+    },
+    {
+      value: 'title_id',
+      v: '标题id',
+      w: 60,
     },
     {
       value: 'title',
@@ -104,7 +116,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
  
       console.log('这是初始化的tableData')
       console.log(this.tableDate)
-      this.addOrEditForm.controls.selectObj.setValue({
+      this.addOrEditForm.controls.selectObj.patchValue({
        v: this.tableDate[0]['v'],
        value: this.tableDate[0]['value'],
       })
@@ -190,10 +202,46 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   deleteClick() {
     
   }
+  /** 点击修改按钮执行的方法 */
   editBefore(e: any) {
     console.log('调用了')
     console.log(e)
     this.modal = true
+    this.mywForm.setValue({
+      id: e.id,
+      title_id: e.title_id,
+      title: e.title,
+      src: e.src,
+      indexLink: e.index_link,
+    })
+    console.log(this.mywForm)
+  }
+  /** 在修改弹窗点击确认执行的方法 */
+  editClick() {
+    console.log(this.mywForm)
+
+    this.linkService.updateLink(this.mywForm.getRawValue().id,{
+      title: this.mywForm.getRawValue().title,
+      titleId: this.mywForm.getRawValue().title_id,
+      src: this.mywForm.getRawValue().src,
+      indexLink: this.mywForm.getRawValue().indexLink
+    }).subscribe({
+      next: data => {
+        console.log(data)
+        if (data && data.affected) {
+          this.message.show('操作成功')
+          this.modal = false
+          this.getLinkById(this.mywForm.getRawValue().title_id)
+          return
+        }
+        this.message.show('操作失败')
+
+      },
+      error: error => {
+        console.log(error)
+        this.message.show('操作异常')
+      }
+    })
   }
 
   optionSelect(e: any) {
