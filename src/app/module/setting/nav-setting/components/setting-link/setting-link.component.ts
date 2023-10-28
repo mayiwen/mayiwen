@@ -55,7 +55,6 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   };
 
   tableCol= [
-
     {
       v: '序号',
       value: 'id',
@@ -80,7 +79,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   ]
   tableData = []
   deleteObj = {} as any
-  modal: boolean =  true // 弹出窗是否显示
+  modal: boolean =  false // 弹出窗是否显示
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
@@ -127,50 +126,6 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     console.log(e);
     this.getLinkById(e.value);
   }
-  dragStart(item: any, index: any, flag?: boolean) {
-    this.dropSaveIndex = index;
-    // this.drapType = 'm';
-  }
-  dragenter(e: any) {
-    e.preventDefault();
-  }
-  dragleave(e: any) {
-    e.preventDefault();
-  }
-  dragover(e: any) {
-    e.preventDefault();
-  }
-  drop(e: any) {
-    e.preventDefault();
-    console.log('drop');
-    // console.log(e.dataTransfer);
-    // console.log(e.dataTransfer.files);
-    // const files = [];
-    // [].forEach.call(
-    //   e.dataTransfer.files,
-    //   function (file) {
-    //     files.push(file);
-    //   },
-    //   false
-    // );
-    // console.log('这是文件');
-    // console.log(files);
-    // files.forEach(async (item) => {
-    //   let dat = await imgIcon(item.path);
-    //   item.img = dat.toDataURL();
-    //   this.appList.push({
-    //     /** 链接的名字，用于图标下的展示 */
-    //     name: item.name,
-    //     /** 链接的位置，用于点击的时候，打开的位置 */
-    //     path: item.path,
-    //     /** 图片的路径 */
-    //     img: item.img,
-    //     /** type 类型 m multiple，多个的，点击弹出单个路径  s single单个的，点击直接跳转 */
-    //     type: 's',
-    //   });
-    //   this.localStorageSet();
-    // });
-  }
   
   /**
    * 重置添加的数据
@@ -209,7 +164,6 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     console.log('这是待删除的对象');
     console.log(item);
     this.deleteObj = item
-    // this.modalDelete = true;
     this.alert.show({
       title: '是否确认删除',
       message: item.src,
@@ -238,6 +192,8 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   }
   editBefore(e: any) {
     console.log('调用了')
+    console.log(e)
+    this.modal = true
   }
 
   optionSelect(e: any) {
