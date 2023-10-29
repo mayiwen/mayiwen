@@ -3,7 +3,7 @@
 
 ## 项目的组成部分
 ### 网页端
-对应的项目路径是：https://github.com/mayiwen/ae   ，
+对应的项目路径是：https://github.com/mayiwen/mayiwen   ，
 对应的项目地址是：http://mayiwen.com/   。
 ### 后端
 对应的项目路径是：https://github.com/mayiwen/mayiwen_backend   ，
