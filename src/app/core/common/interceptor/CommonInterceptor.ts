@@ -15,8 +15,8 @@ export class CommonInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let url = `http://localhost:3000/${req.url}`
-    // let url = `http://121.4.117.203:3000/${req.url}`
+    // let url = `http://localhost:3000/${req.url}`
+    let url = `http://121.4.117.203:3000/${req.url}`
     let apiReq;
     if (this.appService.token) {
       apiReq = req.clone({
