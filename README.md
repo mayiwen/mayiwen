@@ -15,6 +15,7 @@
 由于没有集成第三方组件库，特提供组件库给本项目使用      
 对应的项目路径是：https://github.com/mayiwen/mayiwen_angular   ，
 对应的项目地址是：https://www.npmjs.com/package/mayiwen_angular   。
+对应的项目展示地址是：http://mayiwen.com/component/   。
 
 ## 项目用到开源技术
 html、css、javascript、scss、typescript、angular、rxjs、electron、nodejs、nestjs、typeorm、postgresSql、nginx、wangeditor、mayiwen_angular。
