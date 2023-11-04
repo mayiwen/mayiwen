@@ -1,12 +1,13 @@
 <p>先通过登录鉴权后再操作：</p>
 <form action="" [formGroup]="addOrEditForm" style="margin-top: 3px;">
   <myw-select formControlName="selectObj" (optionSelect)="changeSelect($event)">
-    <myw-option [o]="item" *ngFor="let item of tableDate;"></myw-option>
+    <myw-option [o]="item" v="v" value="value" *ngFor="let item of tableDate;"></myw-option>
   </myw-select>
   <myw-input formControlName="title" name="title" w="150" placeholder="输入标题"></myw-input>
   <myw-input formControlName="url" name="url" w="150" placeholder="输入url"> </myw-input>
   <myw-button (click)="add()">添加</myw-button>
   <myw-button (click)="reset()">重置</myw-button>
+  <myw-button (click)="show()">显示表单信息</myw-button>
 </form>
 <myw-table [tableCol]="tableCol" [tableData]="tableData" (dragAfter)="dragafter($event)">
   <ng-template mywTable select="edit" let-item>

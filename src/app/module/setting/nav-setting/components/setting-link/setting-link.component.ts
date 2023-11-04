@@ -61,7 +61,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     ],
   };
 
-  tableCol= [
+  tableCol = [
     {
       v: '序号',
       value: 'id',
@@ -87,11 +87,11 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       v: '链接地址',
       w: 500,
     },
-   
+
   ]
   tableData = []
   deleteObj = {} as any
-  modal: boolean =  false // 弹出窗是否显示
+  modal: boolean = false // 弹出窗是否显示
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
@@ -99,26 +99,30 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     private linkService: NavSettingLinkService,
     private alert: MywAlertService,
     private message: MywMessageService,
-    
-  ) {}
+
+  ) { }
   async ngOnInit() {
     this.getTableData();
   }
   ngAfterViewInit(): void {
-    window.onresize = () => {};
+    window.onresize = () => { };
   }
   getTableData() {
     console.log('这是打印的内容')
     this.titleService.listTitle().subscribe((res: any) => {
       console.log('这是打印的res')
       console.log(res)
-      this.tableDate = res.map((item: any) => { return {value: item.id, v: item.title}});
- 
+      this.tableDate = res.map((item: any) => { return { value: item.id, v: item.title } });
+
       console.log('这是初始化的tableData')
       console.log(this.tableDate)
-      this.addOrEditForm.controls.selectObj.patchValue({
-       v: this.tableDate[0]['v'],
-       value: this.tableDate[0]['value'],
+      // this.addOrEditForm.controls.selectObj.patchValue({
+      //  v: this.tableDate[0]['v'],
+      //  value: this.tableDate[0]['value'],
+      // })
+      this.addOrEditForm.controls.selectObj.setValue({
+        v: this.tableDate[0]['v'],
+        value: this.tableDate[0]['value'],
       })
       this.cdr.detectChanges()
       console.log(this.addOrEditForm)
@@ -138,11 +142,11 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
     console.log(e);
     this.getLinkById(e.value);
   }
-  
+
   /**
    * 重置添加的数据
    */
-  reset(){
+  reset() {
     this.addOrEditForm.patchValue({
       title: '',
       url: ''
@@ -151,13 +155,13 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   /** 这是添加的方法 */
   add() {
     console.log(this.addOrEditForm);
-    if(this.addOrEditForm.invalid) {
+    if (this.addOrEditForm.invalid) {
       return alert('不可为空。');
     }
     console.log(this.addOrEditForm.getRawValue())
     if (this.addOrEditForm && this.addOrEditForm.getRawValue() && this.addOrEditForm.getRawValue().selectObj && this.addOrEditForm.getRawValue().selectObj.value) {
-      let a = this.addOrEditForm as any 
-      let titleId =  +a.getRawValue().selectObj.value as any
+      let a = this.addOrEditForm as any
+      let titleId = +a.getRawValue().selectObj.value as any
       const params = {
         titleId,
         title: this.addOrEditForm.getRawValue().title,
@@ -169,7 +173,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
         this.getLinkById(this.addOrEditForm.getRawValue().selectObj.value);
       })
     }
-   
+
   }
 
   deleteFn(item: any) {
@@ -192,7 +196,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
               console.log('这是打印的error')
               console.log(error)
               this.message.show(error.message)
-            } 
+            }
           }
         )
       }
@@ -200,7 +204,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   }
 
   deleteClick() {
-    
+
   }
   /** 点击修改按钮执行的方法 */
   editBefore(e: any) {
@@ -220,7 +224,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   editClick() {
     console.log(this.mywForm)
 
-    this.linkService.updateLink(this.mywForm.getRawValue().id,{
+    this.linkService.updateLink(this.mywForm.getRawValue().id, {
       title: this.mywForm.getRawValue().title,
       titleId: this.mywForm.getRawValue().title_id,
       src: this.mywForm.getRawValue().src,
@@ -254,9 +258,9 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   dragafter(e: any) {
     console.log('拖动的执行了')
     console.log(e)
-    this.dropInner(e.dragIndex,e.dropIndex)
+    this.dropInner(e.dragIndex, e.dropIndex)
   }
-  dropInner(dragIndex: number,dropIndex: number) {
+  dropInner(dragIndex: number, dropIndex: number) {
     console.log('进入了里面')
     console.log(dragIndex)
     console.log(dropIndex)
@@ -278,5 +282,9 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       console.log(res);
       this.getLinkById(this.selectObj.value);
     });
+  }
+
+  show() {
+    console.log(this.addOrEditForm)
   }
 }
