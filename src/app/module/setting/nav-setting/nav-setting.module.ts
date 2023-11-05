@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { LoginModule } from '../../login/login.module';
 import { UpdateComponent } from './components/update/update.component';
 import { MywModule } from 'mayiwen_angular';
+import { UpdateService } from './components/update/service/update.service';
 @NgModule({
   declarations: [
     NavSettingComponent,
@@ -33,6 +34,6 @@ import { MywModule } from 'mayiwen_angular';
   bootstrap: [
     NavSettingComponent
   ],
-  providers: [],
+  providers: [UpdateService],
 })
 export class NavSettingModule { }

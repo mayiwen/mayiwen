@@ -1,5 +1,5 @@
-<p>当前功能暂未实现</p>
-<p>先通过登录鉴权后再操作：</p>
+<!-- <p>当前功能暂未实现</p>
+<p></p>
 <p>1：latest.yml</p>
 <p>2：exe文件（如“mayiwen-Setup-0.2.6.exe”）</p>
 <p>3：blockmap（如“mayiwen-Setup-0.2.6.exe.blockmap”）</p>
@@ -8,4 +8,28 @@
 <form  >    
   <input type="file" name="file" id="" multiple [(ngModel)]="file" (click)="uploadFileChange($event)"/>
   <input type="submit" value="提交" (click)="upload()">        
-</form>
+</form> -->
+先通过登录鉴权后再操作：
+<myw-gap></myw-gap>
+<myw-tabs >
+  <myw-tabset v="服务端文件管理">
+      <ng-template mywTabSet>
+        <myw-gap></myw-gap>
+        输入要访问的路径：<myw-input w="300" [(ngModel)]="parentPath"></myw-input>
+        <myw-button (click)="getFileList()">索取文件与文件夹</myw-button>
+        <myw-gap></myw-gap>
+        <myw-button>上级路径</myw-button> <myw-button>刷新</myw-button>
+        <myw-table [tableCol]="tableCol" [tableData]="tableData">
+          <ng-template mywTable select="edit" let-item>
+            <myw-button t="red" (click)="deletePath(item)" >删除</myw-button>
+            <myw-button (click)="enter(item)" >进入</myw-button>
+          </ng-template>
+        </myw-table>
+      </ng-template>
+  </myw-tabset>
+  <myw-tabset v="新版发布">
+      <ng-template mywTabSet="">
+        这是里面的内容
+      </ng-template>
+  </myw-tabset>
+</myw-tabs>

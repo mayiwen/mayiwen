@@ -1,6 +1,11 @@
 
 <div style="padding: 10px;">
   <myw-tabs [(ngModel)]="tabIndex" ngDefaultControl >
+    <myw-tabset v="新版发布">
+      <ng-template mywTabSet>
+        <app-update ></app-update>
+      </ng-template>
+    </myw-tabset>
     <myw-tabset v="登录" (click)="toroute()" [routerLink]="['login']">
         <router-outlet  ></router-outlet>
     </myw-tabset>
@@ -14,11 +19,6 @@
         <app-setting-title ></app-setting-title>
       </ng-template>
     </myw-tabset>
-    <!-- <myw-tabset v="新版发布">
-      <ng-template mywTabSet>
-        <app-update ></app-update>
-      </ng-template>
-    </myw-tabset> -->
     <myw-tabset v="升级/关于">
       <ng-template mywTabSet>
         <app-setting-abuot ></app-setting-abuot>
