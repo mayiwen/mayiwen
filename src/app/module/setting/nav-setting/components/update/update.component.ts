@@ -52,9 +52,9 @@ export class UpdateComponent implements OnInit {
       // this.tableData = res.map((item: any) =>{path:item})
       this.tableData = res.map((item: any) => {
         return {
-          path: item,
+          path: item.path,
           fatherPath: path,
-          
+          type: item.type
         }
       })
       console.log(this.tableData)
@@ -80,12 +80,22 @@ export class UpdateComponent implements OnInit {
     console.log(item)
     this.updateService.delete(item.fatherPath + '/' + item.path).subscribe(res => {
       console.log(res)
-      // this.tableData = res.map((item: any) =>{path:item})
       console.log(this.tableData)
+      this.getFileList()
     })
   }
   enter(item: any) {
     this.parentPath = item.fatherPath + '/' + item.path
     this.getFileList()
+  }
+  top() {
+    // parentPath
+    console.log(this.parentPath)
+    let res = this.es.path.join(this.parentPath, '../')
+    console.log(res)
+    console.log()
+    this.parentPath = res
+    this.getFileList()
+    
   }
 }
