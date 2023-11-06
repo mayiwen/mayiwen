@@ -15,6 +15,8 @@
   <myw-tabset v="服务端文件管理">
       <ng-template mywTabSet>
         <myw-gap></myw-gap>
+        每次都要登录服务器很麻烦。用后端写个简单的操作服务器文件的。发版，只要把新打的包传上去就好了。
+        <myw-gap></myw-gap>
         输入要访问服务器路径：<myw-input w="300" [(ngModel)]="parentPath"></myw-input>
         <myw-button (click)="getFileList()">索取文件与文件夹</myw-button>
         <myw-gap></myw-gap>
