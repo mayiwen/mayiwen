@@ -16,7 +16,8 @@ import { UpdateService } from './service/update.service';
 export class UpdateComponent implements OnInit {
   version = '';
   file: any
-  fileList?: FileList
+  fileList: File[] = []
+  filePath: string = 'C:\\Users\\mayiw\\Desktop\\sss\\'
   /** 表格数据定义 */
   tableData: any = [
   ]
@@ -40,13 +41,13 @@ export class UpdateComponent implements OnInit {
     private es: ElectronService,
     private message: MywMessageService,
     private updateService: UpdateService
-    ) {
+  ) {
   }
   ngOnInit(): void {
   }
 
   getFileList() {
-    let path = this.parentPath 
+    let path = this.parentPath
     this.updateService.getChildByPath(path).subscribe(res => {
       console.log(res)
       // this.tableData = res.map((item: any) =>{path:item})
@@ -68,6 +69,19 @@ export class UpdateComponent implements OnInit {
   upload() {
     console.log('上传文件的方法调用了')
     console.log(this.fileList)
+    if (this.fileList && this.fileList.length > 0) {
+      const formData = new FormData();
+      console.log(this.fileList[0])
+      formData.append("file", this.fileList[0]);
+      formData.append("path", this.filePath);
+      this.updateService.updateUpload(formData).subscribe(res => {
+        console.log(res)
+        this.message.show(res.message)
+      })
+    } else {
+      this.message.show('请选择文件')
+    }
+
   }
   uploadFileChange(e: any) {
     console.log('这是打印的file')
@@ -96,6 +110,6 @@ export class UpdateComponent implements OnInit {
     console.log()
     this.parentPath = res
     this.getFileList()
-    
+
   }
 }

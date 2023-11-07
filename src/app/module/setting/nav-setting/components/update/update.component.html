@@ -12,6 +12,17 @@
 先通过登录鉴权后再操作：
 <myw-gap></myw-gap>
 <myw-tabs >
+  <myw-tabset v="发版">
+    <ng-template mywTabSet="">
+      <myw-gap></myw-gap>
+      <p>选择文件</p>
+      <input type="file" name="file" multiple [(ngModel)]="file" (change)="uploadFileChange($event)">
+      <p>选择上传到的服务器的路径</p>
+      <myw-input [(ngModel)]="filePath" w="300"></myw-input>
+      <myw-gap></myw-gap>
+      <myw-button (click)="upload()">提交</myw-button>
+    </ng-template>
+</myw-tabset>
   <myw-tabset v="服务端文件管理">
       <ng-template mywTabSet>
         <myw-gap></myw-gap>
@@ -29,9 +40,5 @@
         </myw-table>
       </ng-template>
   </myw-tabset>
-  <myw-tabset v="新版发布">
-      <ng-template mywTabSet="">
-        这是里面的内容
-      </ng-template>
-  </myw-tabset>
+
 </myw-tabs>
