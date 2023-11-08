@@ -92,14 +92,14 @@ export class UpdateComponent implements OnInit {
 
   deletePath(item: any) {
     console.log(item)
-    this.updateService.delete(item.fatherPath + '/' + item.path).subscribe(res => {
+    this.updateService.delete(item.fatherPath + '\\' + item.path).subscribe(res => {
       console.log(res)
       console.log(this.tableData)
       this.getFileList()
     })
   }
   enter(item: any) {
-    this.parentPath = item.fatherPath + '/' + item.path
+    this.parentPath = item.fatherPath + '\\' + item.path
     this.getFileList()
   }
   top() {
