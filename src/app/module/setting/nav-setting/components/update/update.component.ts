@@ -35,7 +35,7 @@ export class UpdateComponent implements OnInit {
     },
   ]
   /** 访问的路径 */
-  parentPath: string = 'C:\\Users\\mayiw\\Desktop\\save'
+  parentPath: string = 'C:\\Users\\Administrator\\Desktop'
   constructor(
     private cdr: ChangeDetectorRef,
     private es: ElectronService,
