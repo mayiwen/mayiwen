@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   type:string = 'password'
   addOrEditForm = this.fb.group({
-    name: ['', Validators.required],
-    password: ['', Validators.required],
+    name: ['mayiwen', Validators.required],
+    password: ['MA@yiwen', Validators.required],
     // code: ['', Validators.required],
   });
   ngAfterViewInit(): void {

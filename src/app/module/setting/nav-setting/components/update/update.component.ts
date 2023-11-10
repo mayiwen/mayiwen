@@ -17,7 +17,7 @@ export class UpdateComponent implements OnInit {
   version = '';
   file: any
   fileList: File[] = []
-  filePath: string = 'C:\\Users\\mayiw\\Desktop\\sss\\'
+  filePath: string = 'C:\\Users\\Administrator\\Desktop\\nginx-1.23.1\\html\\update'
   /** 表格数据定义 */
   tableData: any = [
   ]
@@ -35,7 +35,7 @@ export class UpdateComponent implements OnInit {
     },
   ]
   /** 访问的路径 */
-  parentPath: string = 'C:\\Users\\Administrator\\Desktop'
+  parentPath: string = 'C:\\Users\\Administrator\\Desktop\\nginx-1.23.1\\html\\update'
   constructor(
     private cdr: ChangeDetectorRef,
     private es: ElectronService,

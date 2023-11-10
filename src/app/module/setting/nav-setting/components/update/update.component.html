@@ -17,8 +17,10 @@
       <myw-gap></myw-gap>
       <p>选择文件</p>
       <input type="file" name="file" multiple [(ngModel)]="file" (change)="uploadFileChange($event)">
+      <myw-gap></myw-gap>
       <p>选择上传到的服务器的路径</p>
-      <myw-input [(ngModel)]="filePath" w="300"></myw-input>
+      <myw-gap></myw-gap>
+      <myw-input [(ngModel)]="filePath" w="500"></myw-input>
       <myw-gap></myw-gap>
       <myw-button (click)="upload()">提交</myw-button>
     </ng-template>
@@ -28,7 +30,9 @@
         <myw-gap></myw-gap>
         每次都要登录服务器很麻烦。用后端写个简单的操作服务器文件的。发版，只要把新打的包传上去就好了。
         <myw-gap></myw-gap>
-        输入要访问服务器路径：<myw-input w="300" [(ngModel)]="parentPath"></myw-input>
+        输入要访问服务器路径：
+        <myw-gap></myw-gap> <myw-input w="500" [(ngModel)]="parentPath"></myw-input>
+        <myw-gap></myw-gap>
         <myw-button (click)="getFileList()">索取文件与文件夹</myw-button>
         <myw-gap></myw-gap>
         <myw-button (click)="top()">上级路径</myw-button> <myw-button (click)="getFileList()">刷新</myw-button>
