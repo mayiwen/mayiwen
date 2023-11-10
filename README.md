@@ -18,7 +18,7 @@
 对应的项目展示地址是：http://mayiwen.com/component/   。
 
 ## 项目用到开源技术
-html、css、javascript、scss、typescript、angular、rxjs、electron、nodejs、nestjs、typeorm、postgresSql、nginx、wangeditor、mayiwen_angular。
+html、css、javascript、scss、typescript、angular、rxjs、electron、nodejs、expressjs、nestjs、typeorm、postgresSql、nginx、wangeditor、mayiwen_angular。
 
 ## 项目目的
 此项目以学习为目的，学习网页端、pc端、后端、数据库、服务器，使自己在网站建设中的基础问题要有一套自己的解决方案，短期目标是使自己的能力满足网站建设的要求。
