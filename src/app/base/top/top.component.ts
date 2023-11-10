@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ElectronService } from '../../core/services';
+const packageJson = require('../../../../package.json');
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',
@@ -13,7 +14,7 @@ export class TopComponent implements AfterViewInit, OnDestroy {
   constructor(private electron: ElectronService, private cdr: ChangeDetectorRef,) { }
   ngAfterViewInit(): void {
     console.log('这是package.json');
-    // this.version = packageJson.version.replaceAll('"', '');
+    this.version = packageJson.version.replaceAll('"', '');
   }
   ngOnDestroy(): void {
     this.$destroy.next(null);
