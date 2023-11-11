@@ -8,11 +8,13 @@ import { NuoruomaRoutingModule } from './nuoruoma-routing.module';
 import { NuoruomaFont1500Component } from './component/font1500/font1500.component';
 import { NuoruomaScrollComponent } from './component/scroll/scroll.component';
 import { MywModule } from 'mayiwen_angular';
+import { NuoruomaDesignComponent } from './component/design/design.component';
 @NgModule({
   declarations: [
     NuoruomaComponent,
     NuoruomaFont1500Component,
-    NuoruomaScrollComponent
+    NuoruomaScrollComponent,
+    NuoruomaDesignComponent
   ],
   imports: [
     CommonModule,

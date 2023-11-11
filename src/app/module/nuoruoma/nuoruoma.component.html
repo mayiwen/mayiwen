@@ -1,16 +1,25 @@
 <span> 诺若码 </span> <span> nuoruo.com</span> 用编程的手段制作一个较为完善的输入法。以研究数据处理及数据库知识
 <myw-tabs>
+
+    <myw-tabset v="字频表">
+       
+    </myw-tabset>
     <myw-tabset v="单字前1500">
         <ng-template mywTabSet>
             <app-nuoruoma-font1500></app-nuoruoma-font1500>
         </ng-template>
     </myw-tabset>
-    <!-- <myw-tabset v="scroll">
+       <!-- <myw-tabset v="获取">
         <ng-template mywTabSet>
             <app-nuoruoma-scroll></app-nuoruoma-scroll>
         </ng-template>
+    </myw-tabset> -->
+     <!--
+   -->
+    
+    <myw-tabset v="设计">
+        <ng-template mywTabSet>
+            <app-nuoruoma-design></app-nuoruoma-design>
+        </ng-template>
     </myw-tabset>
- 
-    <myw-tabset v="字频表"></myw-tabset>
-    <myw-tabset v="浏览器数据库学习"></myw-tabset> -->
 </myw-tabs>
