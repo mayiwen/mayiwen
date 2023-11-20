@@ -12,8 +12,8 @@
 先通过登录鉴权后再操作：
 <myw-gap></myw-gap>
 <myw-tabs >
-  <myw-tabset v="发版">
-    <ng-template mywTabSet="">
+  <myw-tab v="发版">
+    <ng-template mywTab="">
       <myw-gap></myw-gap>
       <p>选择文件</p>
       <input type="file" name="file" multiple [(ngModel)]="file" (change)="uploadFileChange($event)">
@@ -24,9 +24,9 @@
       <myw-gap></myw-gap>
       <myw-button (click)="upload()">提交</myw-button>
     </ng-template>
-</myw-tabset>
-  <myw-tabset v="服务端文件管理">
-      <ng-template mywTabSet>
+</myw-tab>
+  <myw-tab v="服务端文件管理">
+      <ng-template mywTab>
         <myw-gap></myw-gap>
         每次都要登录服务器很麻烦。用后端写个简单的操作服务器文件的。发版，只要把新打的包传上去就好了。
         <myw-gap></myw-gap>
@@ -43,6 +43,6 @@
           </ng-template>
         </myw-table>
       </ng-template>
-  </myw-tabset>
+  </myw-tab>
 
 </myw-tabs>

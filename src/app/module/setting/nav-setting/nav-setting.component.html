@@ -2,28 +2,28 @@
 <div style="padding: 10px;">
   <myw-tabs [(ngModel)]="tabIndex" ngDefaultControl >
    
-    <myw-tabset v="登录" (click)="toroute()" [routerLink]="['login']">
+    <myw-tab v="登录" (click)="toroute()" [routerLink]="['login']">
         <router-outlet  ></router-outlet>
-    </myw-tabset>
-    <myw-tabset v="首页链接">
-      <ng-template mywTabSet>
+    </myw-tab>
+    <myw-tab v="首页链接">
+      <ng-template mywTab>
         <app-setting-link ></app-setting-link>
       </ng-template>
-    </myw-tabset>
-    <myw-tabset v="首页标题">
-      <ng-template mywTabSet>
+    </myw-tab>
+    <myw-tab v="首页标题">
+      <ng-template mywTab>
         <app-setting-title ></app-setting-title>
       </ng-template>
-    </myw-tabset>
-    <myw-tabset v="新版发布">
-      <ng-template mywTabSet>
+    </myw-tab>
+    <myw-tab v="新版发布">
+      <ng-template mywTab>
         <app-update ></app-update>
       </ng-template>
-    </myw-tabset>
-    <myw-tabset v="升级/关于">
-      <ng-template mywTabSet>
+    </myw-tab>
+    <myw-tab v="升级/关于">
+      <ng-template mywTab>
         <app-setting-abuot ></app-setting-abuot>
       </ng-template>
-    </myw-tabset>
+    </myw-tab>
   </myw-tabs>
 </div>
