@@ -15,8 +15,8 @@
   "private": true,
   "dependencies": {
     "builder-util-runtime": "^9.2.1",
+    "compressing": "1.10.0",
     "electron-updater": "6.1.4",
-    "install": "^0.13.0",
-    "compressing": "1.10.0"
+    "install": "^0.13.0"
   }
 }
