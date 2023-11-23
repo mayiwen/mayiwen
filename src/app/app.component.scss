@@ -1,3 +1,11 @@
-:host {
-  
+@import '../common/style/handle.scss';
+
+.mayiwen-app-box {
+    @include b("mainBackground");
+    @include c("mainColor");
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
