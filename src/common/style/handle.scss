@@ -6,7 +6,7 @@
   $theme-map in $themes {
     $theme-map: $theme-map !global;
 
-    :host-context([data-theme="#{$theme-name}"]) & {
+    :host-context([data-myw-theme="#{$theme-name}"]) & {
       @content;
     }
   }
@@ -40,12 +40,12 @@
 }
 
 @mixin white {
-  :host-context([data-theme="white"]) & {
+  :host-context([data-myw-theme="white"]) & {
     @content;
   }
 }
 @mixin black {
-  :host-context([data-theme="black"]) & {
+  :host-context([data-myw-theme="black"]) & {
     @content;
   }
 }
