@@ -35,7 +35,7 @@ function ipc(win) {
     });
     // 打开开发者工具
     electron_1.ipcMain.on('f12', () => {
-        win.webContents.openDevTools({ mode: 'detach' });
+        win.webContents.openDevTools();
     });
     // 获取图标的软件
     electron_1.ipcMain.on('imgIcon', (event, params) => __awaiter(this, void 0, void 0, function* () {

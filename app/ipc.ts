@@ -24,7 +24,7 @@ export function ipc(win: any) {
   });
   // 打开开发者工具
   ipcMain.on('f12', () => {
-    win.webContents.openDevTools({ mode: 'detach' });
+    win.webContents.openDevTools();
   });
   // 获取图标的软件
   ipcMain.on('imgIcon', async (event: any, params: any) => {

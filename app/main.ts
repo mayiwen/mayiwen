@@ -40,7 +40,7 @@ function createWindow(): BrowserWindow {
 
     require('electron-reloader')(module);
     win.loadURL('http://localhost:4200');
-    win.webContents.openDevTools({ mode: 'detach' });
+    win.webContents.openDevTools();
   } else {
     // Path when running electron executable
     let pathIndex = './index.html';

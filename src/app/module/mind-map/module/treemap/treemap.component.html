@@ -1,58 +1,105 @@
-
 <ng-container *ngIf="fatherNgModel && fatherNgModel.length > 0">
-    <div *ngFor="let item of fatherNgModel; let i = index" 
-     (dragover)="$event.preventDefault()" (drop)="dropItem(item, i, $event)" style="position: relative;" >
-        <div class="left-join" ></div>
-            <div >
-                <span  draggable="true" (dragstart)="dragTreeItem(item, i, $event)" >
-                    <span *ngIf="item.children && item.children.length > 0;" (click)="item.flagExpand = !item.flagExpand" >
-                        <svg class="icon" aria-hidden="true" style="font-size: 24px;">
-                            <use xlink:href="#icon-plus-square" *ngIf="!item.flagExpand"></use>
-                            <use xlink:href="#icon-minus-square" *ngIf="item.flagExpand"></use>
-                        </svg>
-                    </span>
-                    <span *ngIf="!(item.children && item.children.length > 0);">
-                        <svg class="icon" aria-hidden="true" style="opacity: 0.1; font-size: 24px; ">
-                            <use xlink:href="#icon-minus-square" ></use>
-                        </svg>
-                    </span>
-                </span>
-                <span style="display: inline-block; background-color: white; width: 420px; margin-left: 10px; font-size: 15px; height: 27px; line-height: 27px;">
-                    <!-- <input type="text" [(ngModel)]="item.v" style="height: 25px; width: 400px;"  (click)="getMessage(item, i, $event)" draggable="false"> -->
-                    <myw-input type="text" [(ngModel)]="item.v" w="418"  (click)="getMessage(item, i, $event)" draggable="false"> </myw-input>
+  <div
+    *ngFor="let item of fatherNgModel; let i = index"
+    (dragover)="$event.preventDefault()"
+    (drop)="dropItem(item, i, $event)"
+    style="position: relative"
+  >
+    <div class="left-join"></div>
+    <div>
+      <span draggable="true" (dragstart)="dragTreeItem(item, i, $event)">
+        <span
+          *ngIf="item.children && item.children.length > 0"
+          (click)="item.flagExpand = !item.flagExpand"
+        >
+          <svg class="icon" aria-hidden="true" style="font-size: 24px">
+            <use xlink:href="#icon-plus-square" *ngIf="!item.flagExpand"></use>
+            <use xlink:href="#icon-minus-square" *ngIf="item.flagExpand"></use>
+          </svg>
+        </span>
+        <span *ngIf="!(item.children && item.children.length > 0)">
+          <svg
+            class="icon"
+            aria-hidden="true"
+            style="opacity: 0.1; font-size: 24px"
+          >
+            <use xlink:href="#icon-minus-square"></use>
+          </svg>
+        </span>
+      </span>
+      <span
+        style="
+          display: inline-block;
+          width: 420px;
+          margin-left: 10px;
+          font-size: 15px;
+          height: 27px;
+          line-height: 27px;
+        "
+      >
+        <myw-input
+          type="text"
+          [(ngModel)]="item.v"
+          w="418"
+          (click)="getMessage(item, i, $event)"
+          draggable="false"
+        >
+        </myw-input>
+      </span>
+      <span (click)="addson(i)" title="创建一个子元素" class="control-button">
+        <svg class="icon" aria-hidden="true" style="font-size: 24px">
+          <use xlink:href="#icon-right-circle"></use>
+        </svg>
+      </span>
+      <span
+        (click)="addElderBrother(i)"
+        title="创建一个哥哥元素"
+        class="control-button"
+      >
+        <svg class="icon" aria-hidden="true" style="font-size: 24px">
+          <use xlink:href="#icon-up-circle"></use>
+        </svg>
+      </span>
+      <span
+        (click)="addYoungerBrother(i)"
+        title="创建一个弟弟元素"
+        class="control-button"
+      >
+        <svg class="icon" aria-hidden="true" style="font-size: 24px">
+          <use xlink:href="#icon-down-circle"></use>
+        </svg>
+      </span>
+      <span
+        (click)="addFather(i)"
+        title="创建一个父亲元素"
+        class="control-button"
+        ><svg class="icon" aria-hidden="true" style="font-size: 24px">
+          <use xlink:href="#icon-left-circle"></use></svg>
+        </span>
 
-                </span>
-                <span (click)="addson(i)" title="创建一个子元素" class="control-button">
-                    <svg class="icon" aria-hidden="true" style="font-size: 24px; ">
-                        <use xlink:href="#icon-right-circle" ></use>
-                    </svg>
-                </span> 
-                <span (click)="addElderBrother(i)" title="创建一个哥哥元素" class="control-button">
-                    <svg class="icon" aria-hidden="true" style="font-size: 24px; ">
-                        <use xlink:href="#icon-up-circle" ></use>
-                    </svg>
-                </span> 
-                <span (click)="addYoungerBrother(i)" title="创建一个弟弟元素" class="control-button">
-                    <svg class="icon" aria-hidden="true" style="font-size: 24px; ">
-                        <use xlink:href="#icon-down-circle" ></use>
-                    </svg>
-                </span> 
-                <span (click)="addFather(i)" title="创建一个父亲元素" class="control-button"><svg class="icon" aria-hidden="true" style="font-size: 24px; ">
-                    <use xlink:href="#icon-left-circle" ></use>
-                </svg></span> 
-              
-                <span [title]="indexId ? indexId + '-' + i : i + '' + '\n' + item.uuid" class="control-button">
-                    <svg class="icon" aria-hidden="true" style="font-size: 24px; ">
-                        <use xlink:href="#icon-info-circle" ></use>
-                    </svg>
-                </span> 
-                <span (click)="delete(i, item)" *ngIf="!(fatherNgModel.length === 1 && indexId === '')">
-                    <myw-button style="height: 30px;" >删除</myw-button>
-                </span>
-            </div>
-            <div style="padding-left: 13px;" *ngIf="item.children && item.children.length > 0 && item.flagExpand">
-                <app-mind-map-tree-map [(ngModel)]="item.children" [indexId]="indexId ? indexId + '-' + i : i + ''"></app-mind-map-tree-map>
-            </div>
+      <span
+        [title]="indexId ? indexId + '-' + i : i + '' + '\n' + item.uuid"
+        class="control-button"
+      >
+        <svg class="icon" aria-hidden="true" style="font-size: 24px">
+          <use xlink:href="#icon-info-circle"></use>
+        </svg>
+      </span>
+      <span
+        (click)="delete(i, item)"
+        *ngIf="!(fatherNgModel.length === 1 && indexId === '')"
+      >
+        <myw-button style="height: 30px">删除</myw-button>
+      </span>
     </div>
+    <div
+      style="padding-left: 13px"
+      *ngIf="item.children && item.children.length > 0 && item.flagExpand"
+    >
+      <app-mind-map-tree-map
+        [(ngModel)]="item.children"
+        [indexId]="indexId ? indexId + '-' + i : i + ''"
+      ></app-mind-map-tree-map>
+    </div>
+  </div>
 </ng-container>
-
