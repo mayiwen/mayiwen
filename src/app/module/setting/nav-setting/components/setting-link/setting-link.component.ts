@@ -23,7 +23,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
   addOrEditForm = this.fb.group({
     title: ['', Validators.required],
     url: ['', Validators.required],
-    selectObj: this.fb.group({
+    selectObj: this.fb.control({
       value: '',
       v: ''
     })
@@ -120,10 +120,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       //  v: this.tableDate[0]['v'],
       //  value: this.tableDate[0]['value'],
       // })
-      this.addOrEditForm.controls.selectObj.setValue({
-        v: this.tableDate[0]['v'],
-        value: this.tableDate[0]['value'],
-      })
+      this.addOrEditForm.controls.selectObj.patchValue(this.tableDate[0])
       this.cdr.detectChanges()
       console.log(this.addOrEditForm)
       const titleid = this.tableDate[0]['value'];
@@ -159,7 +156,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       return alert('不可为空。');
     }
     console.log(this.addOrEditForm.getRawValue())
-    if (this.addOrEditForm && this.addOrEditForm.getRawValue() && this.addOrEditForm.getRawValue().selectObj && this.addOrEditForm.getRawValue().selectObj.value) {
+    if (this.addOrEditForm && this.addOrEditForm.getRawValue() && this.addOrEditForm.getRawValue().selectObj && this.addOrEditForm.getRawValue().selectObj?.value) {
       let a = this.addOrEditForm as any
       let titleId = +a.getRawValue().selectObj.value as any
       const params = {
@@ -170,7 +167,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
       }
       console.log(params);
       this.linkService.addLink(params).subscribe((res: any) => {
-        this.getLinkById(this.addOrEditForm.getRawValue().selectObj.value);
+        this.getLinkById(this.addOrEditForm.getRawValue().selectObj?.value);
       })
     }
 
@@ -190,7 +187,7 @@ export class SettingLinkComponent implements OnInit, AfterViewInit {
             next: (res: any) => {
               console.log('这是res打印的内容')
               console.log(res)
-              this.getLinkById(this.addOrEditForm.getRawValue().selectObj.value);
+              this.getLinkById(this.addOrEditForm.getRawValue().selectObj?.value);
             },
             error: (error: any) => {
               console.log('这是打印的error')
