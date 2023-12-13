@@ -4,3 +4,30 @@
     height: 100px;
     outline: 1px solid red;
   }
+
+.black {
+  // 
+  background-color: #222222; // 主背景 mainColor
+  color: #a5a4a4;
+  .box {
+    border: 1px solid #444;
+    background-color: #333; // 主背景 mainColor
+    border-radius: 4px;
+  }
+}
+
+.white {
+  background-color: #f7f7f7; // 主背景 mainColor
+  color: #515257;
+  .box {
+    border: 1px solid #ccc;
+    background-color: #f1f1f1; // 主背景 mainColor
+
+    border-radius: 4px;
+  }
+}
+.box {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
