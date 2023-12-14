@@ -9,12 +9,14 @@ import { NuoruomaFont1500Component } from './component/font1500/font1500.compone
 import { NuoruomaScrollComponent } from './component/scroll/scroll.component';
 import { MywModule } from 'mayiwen_angular';
 import { NuoruomaDesignComponent } from './component/design/design.component';
+import { ColorPanelComponent } from './component/color-panel/color-panel.component';
 @NgModule({
   declarations: [
     NuoruomaComponent,
     NuoruomaFont1500Component,
     NuoruomaScrollComponent,
-    NuoruomaDesignComponent
+    NuoruomaDesignComponent,
+    ColorPanelComponent
   ],
   imports: [
     CommonModule,
