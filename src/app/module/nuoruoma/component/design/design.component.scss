@@ -7,12 +7,16 @@
 
 .black {
   // 
-  background-color: #222222; // 主背景 mainColor
+  background-color: #252525; // 主背景 mainColor
   color: #a5a4a4;
   .box {
-    border: 1px solid #444;
-    background-color: #333; // 主背景 mainColor
+    border: 1px solid #444; // box border 
+    background-color: #333; // box background
     border-radius: 4px;
+    input {
+      border: 1px solid #444; // box border 
+      background-color: red;
+    }
   }
 }
 
@@ -20,14 +24,23 @@
   background-color: #f7f7f7; // 主背景 mainColor
   color: #515257;
   .box {
-    border: 1px solid #ccc;
-    background-color: #f1f1f1; // 主背景 mainColor
-
+    border: 1px solid #ccc; // box border
+    background-color: #f1f1f1; // box backgground
     border-radius: 4px;
+    input {
+      border: 1px solid #ccc; // box border
+      padding-left: 4px;
+    }
   }
 }
 .box {
   margin: 10px;
   height: 100px;
-  width: 100px;
+  width: 200px;
+  input {
+    height: 28px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    
+  }
 }
