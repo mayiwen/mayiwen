@@ -1,0 +1,31 @@
+/* 主颜色 */
+[data-myw-theme="black"] .mayiwen_bg {
+  background-color: #252525;
+}
+[data-myw-theme="white"] .mayiwen_bg {
+  background-color: #f7f7f7;
+}
+/* 主字体 */
+[data-myw-theme="black"] .mayiwen_color {
+  background-color: #a5a4a4;
+}
+[data-myw-theme="white"] .mayiwen_color {
+  background-color: #515257;
+}
+/* 主边框 */
+[data-myw-theme="black"] .mayiwen_border {
+  border: 1px solid #444;
+}
+[data-myw-theme="white"] .mayiwen_border {
+  border: 1px solid #bbb;
+}
+.mayiwen_radius {
+  border-radius: 4px;
+}
+/** 盒子颜色 */
+[data-myw-theme="black"] .mayiwen_box_bg {
+  background-color: #333;
+}
+[data-myw-theme="white"] .mayiwen_box_bg {
+  background-color: #382222;
+}

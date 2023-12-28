@@ -11,11 +11,14 @@
   color: #a5a4a4;
   .box {
     border: 1px solid #444; // box border 
-    background-color: #333; // box background
+    background-color: #333; // box b  ackground
     border-radius: 4px;
     input {
+      // border: 1px solid #555; // box border 
       border: 1px solid #444; // box border 
-      background-color: red;
+
+      // background-color: #454545;
+      background-color: #252525;
     }
   }
 }
@@ -28,8 +31,10 @@
     background-color: #f1f1f1; // box backgground
     border-radius: 4px;
     input {
-      border: 1px solid #ccc; // box border
-      padding-left: 4px;
+      border: 1px solid #bbb; // box border 
+      // background-color: #dee0e0;
+      background-color: #f7f7f7;
+
     }
   }
 }
@@ -37,6 +42,7 @@
   margin: 10px;
   height: 100px;
   width: 200px;
+  padding: 4px;
   input {
     height: 28px;
     box-sizing: border-box;
