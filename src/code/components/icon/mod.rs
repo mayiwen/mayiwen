@@ -1,0 +1,19 @@
+use std::fmt::Display;
+
+use crate::myw::icon::Myw;
+use crate::myw::{self};
+use dioxus::events::KeyboardEvent;
+use dioxus::html::h3;
+use dioxus::{html::view, prelude::*};
+use keyboard_types::Key;
+use serde::{self, Deserialize, Serialize};
+use web_sys;
+
+#[component]
+pub fn Index() -> Element {
+    rsx! {
+        myw::Gap { }
+        myw::icon::Myw{},
+        myw::icon::Close{}
+    }
+}

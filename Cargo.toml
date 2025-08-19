@@ -1,0 +1,54 @@
+[package]
+name = "mayiwen"
+version = "0.1.0"
+authors = ["mayiwen <i@mayiwen.com>"]
+edition = "2021"
+
+[lib]
+name = "mayiwen"        # 必须与项目名匹配
+crate-type = ["cdylib"] # 关键配置
+path = "src/main.rs"    # 显式指定路径
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.6.0", features = ["router", "web", "hooks"] }
+reqwest = { version = "0.12.20", features = ["json"] }
+serde = { version = "1.0.219", features = ["derive"] }
+# tokio = "1.45.1"
+tokio = { version = "1.45.1", features = ["rt", "time"] } # 关键点：必须启用 time 特性
+web-sys = { version = "0.3.77", features = [
+    "HtmlDialogElement",
+    "EventTarget",
+    "Document",
+    "HtmlElement",
+] }
+dioxus-logger = "0.4" # 日志插件
+log = "0.4" # Rust 标准日志库
+
+gloo-timers = "0.3"
+futures-timer = "3.0.3"
+
+[features]
+default = ["web"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
+
+[profile.release]
+opt-level = "z"   # 优化代码大小而非速度
+lto = true        # 链接时优化
+codegen-units = 1 # 减少并行代码生成以提高优化
+panic = "abort"   # 移除 panic 处理代码
+strip = true      # 移除调试符号
