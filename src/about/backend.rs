@@ -1,17 +1,9 @@
-use std::fmt::Display;
-
-use super::backend;
 use super::models;
-use crate::myw::{self, Tab, TabColumn};
 use crate::GLOBAL_USER_AUTH;
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
+use dioxus::prelude::*;
 use reqwest::header::HeaderMap;
 use reqwest::header::HeaderValue;
 use reqwest::Client;
-use serde::{self, Deserialize, Serialize};
 use web_sys;
 use web_sys::console;
 // 此层主要是为了发送后端接口。
@@ -54,29 +46,6 @@ pub async fn fetch_nav_link(id: u32) -> Result<Vec<models::NavLink>, String> {
         Err(err) => Err(err.to_string()),
     }
 }
-
-// pub async fn fetch_login(login_params: &models::Login) -> Result<models::LoginResult, String> {
-//     let client = Client::new();
-//     match client
-//         .request(
-//             reqwest::Method::OPTIONS,
-
-//             "https://mayiwen.com:3000/auth/login",
-//         )
-//         .json(&login_params)
-//         .header("Content-Type", "application/json")
-//         .send()
-//         .await
-//     {
-//         Ok(res) => {
-//             println!("Response status: {}", res.status());
-//             res.json::<models::LoginResult>()
-//                 .await
-//                 .map_err(|e| e.to_string())
-//         }
-//         Err(err) => Err(err.to_string()),
-//     }
-// }
 pub async fn fetch_login(login_params: &models::Login) -> Result<models::LoginResult, String> {
     let client = Client::new();
     match client
@@ -100,7 +69,7 @@ pub async fn fetch_login(login_params: &models::Login) -> Result<models::LoginRe
                 Err(_) => {
                     console::log_1(&"error".into());
                     Ok(models::LoginResult {
-                        access_token: "错误的token".to_string(),
+                        access_token: "error".to_string(),
                     })
                 }
             }

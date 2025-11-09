@@ -1,6 +1,6 @@
 [package]
 name = "mayiwen"
-version = "0.1.0"
+version = "1.2.4"
 authors = ["mayiwen <i@mayiwen.com>"]
 edition = "2021"
 
@@ -11,7 +11,9 @@ path = "src/main.rs"    # 显式指定路径
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dioxus = { version = "0.6.0", features = ["router", "web", "hooks"] }
+dioxus = { version = "0.7.0", features = ["router", "web", "hooks"] }
+# dioxus = { version = "0.7.0", features = ["router", "web", "hooks", "wasm-split"] }
+# dioxus-router = { version = "0.7", features = ["wasm-split"] }
 reqwest = { version = "0.12.20", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 # tokio = "1.45.1"
@@ -52,3 +54,4 @@ lto = true        # 链接时优化
 codegen-units = 1 # 减少并行代码生成以提高优化
 panic = "abort"   # 移除 panic 处理代码
 strip = true      # 移除调试符号
+

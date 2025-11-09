@@ -12,6 +12,12 @@ body {
     background-color: var(--myw-bc);
     color: var(--myw-color);
 }
+p,
+span,
+button,
+input {
+    font-size: 16px;
+}
 
 html {
     --myw-color: #515151;
@@ -24,7 +30,8 @@ html {
     /*一级盒子背景*/
     --myw-activeBc: #e6e6e6;
     /*一级盒子选中色*/
-    --myw-active: #4e6ef2;
+    /* --myw-active: #4e6ef2; */
+    --myw-active: #3f85ff;
     /*选中色*/
     --myw-redDefault: #e74c3c;
     /*红色悬停*/
@@ -57,7 +64,8 @@ html[data-mayiwen-theme="black"] {
     /* 一级盒子背景 */
     --myw-activeBc: #393939;
     /* 一级盒子选中色 */
-    --myw-active: #4e6ef2;
+    /* --myw-active: #4e6ef2; */
+        --myw-active: #3f85ff;
     /* 选中色 */
     --myw-redDefault: #e74c3c;
     /* 红色悬停 */
@@ -78,31 +86,51 @@ html[data-mayiwen-theme="black"] {
     --myw-yellowDisabled: #f8e286;
     /* 蓝色禁用 */
 }
+a {
+    color: var(--myw-blueHover);
+}
 
 .myw-button {
     color: var(--myw-color);
     background-color: var(--myw-boxBc);
     border: 1px solid var(--myw-border);
-    height: 30px;
-    line-height: 30px;
-    padding: 0 4px;
+    height: 38px;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 0px  4px;
+      position: relative;
     border-radius: 4px;
     outline: none;
-    position: relative;
     cursor: pointer;
-    min-width: 28px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    min-width: 40px;
+
+    /* 多行文本截断 */
+    /* display: -webkit-box; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    vertical-align: bottom;
+    text-overflow: ellipsis;
+
+    /* 移除单行文本相关属性 */
+    /* white-space: nowrap; */ /* 注释掉或删除这一行 */
+    word-break: break-all;
+    box-sizing: border-box; /* 确保padding包含在高度内 */
     user-select: none;
     vertical-align: top;
 }
 
-.myw-button:hover,
+a {
+    color: var(--myw-blueDefault);
+}
+
+.myw-button:hover {
+    background-color: var(--myw-activeBc);
+    color: var(--myw-active);
+}
 .myw-button.active {
     background-color: var(--myw-activeBc);
     color: var(--myw-active);
+    border: 1px solid var(--myw-border)!important;
 }
 .myw-button:disabled {
     cursor: not-allowed;
@@ -123,7 +151,7 @@ html[data-mayiwen-theme="black"] {
     color: var(--myw-color);
     border-radius: 4px;
     padding: 0 4px;
-    height: 30px;
+    height: 36px;
     box-sizing: border-box;
     border: 1px solid var(--myw-border);
     outline: none;
@@ -165,11 +193,42 @@ input[type="number"] {
     height: 5px;
 }
 .main {
-    height: 100dvh;
+    height: 100%;
+}
+#main {
+    height: 100%;
 }
 
 .ellipsis {
     white-space: nowrap; /* 防止文本换行 */
     overflow: hidden; /* 隐藏溢出的内容 */
     text-overflow: ellipsis; /* 显示省略号来代表被修剪的文本 */
+}
+
+::-webkit-scrollbar {
+    padding-top: 30px;
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(102, 102, 102, 0.7);
+    border-radius: 40px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: var(--myw-bc);
+}
+
+/* 新增：Firefox 兼容样式 */
+html,
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 102, 102, 0.7) transparent;
+}
+
+/* 可选：为特定容器添加顶部间距（模拟原来的 padding-top） */
+.scroll-with-padding {
+    padding-top: 30px;
 }

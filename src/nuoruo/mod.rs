@@ -2,56 +2,83 @@ use dioxus::prelude::*;
 
 use crate::myw;
 
+mod android;
+mod ios;
+mod linux;
+mod macos;
+mod show;
+mod windows;
+
 #[component]
 pub fn Index() -> Element {
-    static NUORUO: Asset = asset!("/assets/mayiwen/nuoruo/nuoruo.gif");
+    let tabs = vec![
+        myw::Tab {
+            title: "ios".to_string(),
+            content: ios::Index(),
+        },
+        myw::Tab {
+            title: "android".to_string(),
+            content: android::Index(),
+        },
+        myw::Tab {
+            title: "windows".to_string(),
+            content: windows::Index(),
+        },
+        myw::Tab {
+            title: "macos".to_string(),
+            content: macos::Index(),
+        },
+        myw::Tab {
+            title: "linux".to_string(),
+            content: linux::Index(),
+        },
+        myw::Tab {
+            title: "功能".to_string(),
+            content: show::Index(),
+        },
+    ];
     rsx! {
-        div {
+        div { style: "text-align: center",
 
-            style: "text-align: center",
-            myw::Gap {  }
-            h1 {
-                "诺若电子书阅读器"
-            }
-            p { "基于rust、tauri、react技术架构。" }
-            myw::Gap {  }
-            p {
-                style: "font-size: 24px",
-                "下载地址：",
-
-            }
-            p {
-                style: "font-size: 18px",
+            p { style: "text-align: right; margin-right: 8px;",
                 a {
-                    href: "https://gitlink.org.cn/mayiwen/yueduqi/releases",
-                    "前往诺若电子书阅读器-windows"
+                    href: "https://gitlink.org.cn/mayiwen/yueduqi",
+                    target: "_blank",
+                    title: "gitlink 访问源码",
+
+                    myw::Button { style: "padding-top: 3px!important;", myw::icon::GitLink {} }
                 }
-
+                myw::Gap { w: "8" }
+                a {
+                    href: "https://github.com/mayiwen/yueduqi",
+                    target: "_blank",
+                    title: "github 访问源码",
+                    myw::Button { myw::icon::Github {} }
+                }
             }
-            p {
-                style: "font-size: 18px",
-                "页面下载exe文件",
 
+            h1 {
+               title: "https://mayiwen.com/yueduqi",
+                "一文小说阅读器" }
+            myw::Gap {}
+
+            a {
+                href: "https://gitlink.org.cn/mayiwen/yueduqi/releases",
+                title: "https://gitlink.org.cn/mayiwen/yueduqi/releases",
+                target: "_blank",
+                myw::Button { style: "transform: scale(1.4)", "gitlink下载开源软件" }
             }
-            // p {
-            //     style: "font-size: 18px",
-
-            //     a {
-            //         href: "https://gitlink.org.cn/mayiwen/yueduqi",
-            //         "访问gitlink仓库"
-            //     }
-
-            // }
-
-             myw::Gap {  }
-
-            img {
-                style: "width: 100%; max-width: 1000px;",
-                src: NUORUO,
-                alt: "马一文桌面端截图"
+            myw::Gap { h: "20" }
+            p { a {
+                href: "https://github.com/mayiwen/yueduqi/releases",
+                title: "https://github.com/mayiwen/yueduqi/releases",
+                target: "_blank",
+                "github分流下载"
+            }}
+            myw::Gap { h: "20" }
+            div { style: "width: 375px; margin: auto; text-align: left",
+                myw::Tabset { tabs }
             }
-            p {   "以诺若的名义发布面向应用商店的作品。以后将迁移到nuoruo.com" }
-
         }
     }
 }

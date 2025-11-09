@@ -1,11 +1,5 @@
-use std::fmt::Display;
 
-use super::backend;
-use crate::myw::{self, Tab, TabColumn};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
+use dioxus::prelude::*;
 use serde::{self, Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]

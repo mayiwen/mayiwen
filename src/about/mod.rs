@@ -1,12 +1,6 @@
-use std::fmt::Display;
 
-use crate::myw::{self, Tab};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
-use web_sys;
+use crate::myw::{self};
+use dioxus::prelude::*;
 mod about;
 mod backend;
 mod data;
@@ -45,17 +39,20 @@ pub fn Index() -> Element {
     rsx! {
         div {
             h1 {
-                "设置与关于",
+                "设置与关于"
+                if GLOBAL_USER_AUTH.read().len() > 0 {
+                    span { style: "font-size: 20px", "登录成功" }
+                }
             }
-            p {
-                style: "  word-break: break-all;  /* 关键属性：强制所有字符都可换行 */
-                overflow-wrap: anywhere; /* 更智能的断行（兼容性较好） */
-                white-space: normal;    /* 允许换行 */
-                width: 100%;           /* 必须指定宽度 */
-                box-sizing: border-box;",
-                "{GLOBAL_USER_AUTH.read()}"
-            }
-            login::Index{}
+            // p {
+            //     style: "  word-break: break-all;  /* 关键属性：强制所有字符都可换行 */
+            //     overflow-wrap: anywhere; /* 更智能的断行（兼容性较好） */
+            //     white-space: normal;    /* 允许换行 */
+            //     width: 100%;           /* 必须指定宽度 */
+            //     box-sizing: border-box;",
+            //     "{GLOBAL_USER_AUTH.read()}"
+            // }
+            login::Index {}
 
             myw::Tabset { tabs }
 

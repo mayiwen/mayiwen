@@ -1,22 +1,11 @@
 use dioxus::prelude::*;
 use gloo_timers::callback::Interval;
-use std::{
-    cell::{Cell, RefCell},
-    future::pending,
-    rc::Rc,
-    thread::sleep,
-};
+use std::rc::Rc;
 
-use web_sys::{
-    console, js_sys,
-    wasm_bindgen::{prelude::Closure, JsCast},
-    window,
-};
 pub mod icon;
 pub mod util;
-use futures_timer::Delay; // 轻量级定时器
+ // 轻量级定时器
 
-use std::time::Duration;
 // 定义组件的属性结构
 #[derive(Props, PartialEq, Clone)]
 pub struct ButtonProps {
@@ -58,6 +47,12 @@ pub fn Button(props: ButtonProps) -> Element {
     } else {
         "".to_string()
     };
+    // if props.tabset {
+    //     border = "1px solid both!important".to_string();
+    // } else {
+    //     border = "1px solid transparent!important".to_string();
+    // }
+
     rsx! {
         button {
             class: "myw-button {is_active} {props.class}",
@@ -79,31 +74,24 @@ pub fn Tabset(tabs: Vec<Tab>) -> Element {
     let mut active_tab = use_signal(|| 0);
 
     rsx! {
-        div {
-            class: "tabset-container",
+        div { class: "tabset-container",
 
             // 标签栏
-            div {
-                class: "tab-header",
-                for (index, tab) in tabs.iter().enumerate() {
+            div { class: "tab-header",
+                for (index , tab) in tabs.iter().enumerate() {
                     Button {
                         key: "{index}",
                         active: if *active_tab.read() == index { true } else { false },
-                        border: if *active_tab.read() == index { "both" } else {       "none" },
+                        border: if *active_tab.read() == index { "both" } else { "none" },
                         onclick: move |_| active_tab.set(index),
                         "{tab.title}"
                     }
                 }
             }
-            div {
-                style: "border-bottom: 1px solid var(--myw-border); text-align: left",
-            }
+            div { style: "border-bottom: 1px solid var(--myw-border); text-align: left" }
 
             // 内容区
-            div {
-                class: "tab-content",
-                {tabs.get(*active_tab.read()).map(|tab| tab.content.clone())}
-            }
+            div { class: "tab-content", {tabs.get(*active_tab.read()).map(|tab| tab.content.clone())} }
         }
     }
 }
@@ -131,8 +119,7 @@ pub fn Tabs(
     rsx! {
         div {
             // 标签栏容器
-            div {
-                style: "border-bottom: 1px solid var(--myw-border); text-align: left",
+            div { style: "border-bottom: 1px solid var(--myw-border); text-align: left",
 
                 // 动态渲染标签按钮
                 for tab in tabs.read().iter() {
@@ -144,15 +131,13 @@ pub fn Tabs(
                                 active: *active_id.read() == tab_id,
                                 border: if *active_id.read() == tab_id { "both" } else { "none" },
                                 onclick: move |_| {
-                                    active_id.set(tab_id);  // 更新响应式active_id
+                                    active_id.set(tab_id);
                                     on_tab_change.call(tab_id);
                                 },
                                 "{tab.title}"
                             }
                         }
-
                     }
-
                 }
             }
         }
@@ -196,17 +181,19 @@ pub fn MessageView(message: MessageItem) -> Element {
 
     rsx! {
         p {
-            style: format!("background-color: {bg_color};
-                border: 1px solid var(--myw-border);
-                border-radius: 4px;
-                padding: 4px;
-                color: var(--myw-bc);
-                margin-bottom: 4px;
-                min-width: 300px;
-                width: 100%;
-                max-width: 800px;
-                opacity: 0.9;"),
-            "{message.m}"  // 显示实际消息内容
+            style: format!(
+                "background-color: {bg_color};
+                                                                        border: 1px solid var(--myw-border);
+                                                                        border-radius: 4px;
+                                                                        padding: 4px;
+                                                                        color: var(--myw-bc);
+                                                                        margin-bottom: 4px;
+                                                                        min-width: 300px;
+                                                                        width: 100%;
+                                                                        max-width: 800px;
+                                                                        opacity: 0.9;",
+            ),
+            "{message.m}" // 显示实际消息内容
         }
     }
 }
@@ -229,7 +216,7 @@ pub struct MessageItem {
 
 #[component]
 pub fn AddMessage() -> Element {
-    let mut messages = consume_context::<Signal<Vec<MessageItem>>>();
+    let messages = consume_context::<Signal<Vec<MessageItem>>>();
     let mut flag = false;
     // console::log_1(&format!("方法执行了").into());
     use_future(move || {
@@ -267,8 +254,7 @@ pub fn AddMessage() -> Element {
     });
 
     rsx! {
-        div {
-            style: "position: fixed; left: 50%; top: 20px; transform: translate(-50%, 0); z-index: 100000000000000;",
+        div { style: "position: fixed; left: 50%; top: 20px; transform: translate(-50%, 0); z-index: 100000000000000;",
             for message in messages.read().iter() {
                 MessageView { message: message.clone() }
             }
@@ -308,41 +294,30 @@ pub fn Table<T: Clone + PartialEq + 'static>(
     key_fn: fn(&T) -> String,
     #[props(default)] on_row_index_change: EventHandler<(u32, u32)>, // 标签切换回调
 ) -> Element {
-    let row_height = row_height.unwrap_or(32);
-    let header_height = header_height.unwrap_or(32);
+    let row_height = row_height.unwrap_or(40);
+    let header_height = header_height.unwrap_or(40);
     let mut dragged_index = use_signal(|| None::<u32>);
     // 使用 use_memo 计算总宽度，当 columns 变化时自动重新计算
     let total_width =
         use_memo(move || columns.read().iter().map(|col| col.width + 9).sum::<u32>() + 1);
 
     rsx! {
-        div {
-            class: "table-container",
-            style: "padding: 2px; overflow: auto;",
+        div { class: "table-container", style: "overflow: auto;",
 
-            div {
-                style: "width: {total_width}px;",
+            div { style: "width: {total_width}px;",
 
                 // Header row - 当 columns 变化时会自动重新渲染
                 div {
                     class: "table-header",
                     style: "font-size: 0; height: {header_height}px; margin-bottom: 1px;",
 
-                    for (index, col) in columns.read().iter().enumerate() {
+                    for (index , col) in columns.read().iter().enumerate() {
                         div {
                             class: "table-header-cell ellipsis",
                             style: format!(
-                                "display: inline-block;
-                                height: {header_height}px;
-                                line-height: {header_height}px;
-                                width: {}px;
-                                font-size: 14px;
-                                padding: 0 4px;
-                                border: 1px solid var(--myw-border);
-                                border-left: {};
-                                background-color: var(--myw-boxBc);",
+                                "display: inline-block; height: {header_height}px; line-height: {header_height}px; width: {}px; font-size: 16px; padding: 0 4px; border: 1px solid var(--myw-border);border-left: {};background-color: var(--myw-boxBc);",
                                 col.width,
-                                if index == 0 { "1px solid var(--myw-border)" } else { "none" }
+                                if index == 0 { "1px solid var(--myw-border)" } else { "none" },
                             ),
                             key: "{col.id}",
                             title: "{col.title}",
@@ -352,10 +327,9 @@ pub fn Table<T: Clone + PartialEq + 'static>(
                 }
 
                 // Table body - 当 data 变化时会自动重新渲染
-                div {
-                    class: "table-body",
+                div { class: "table-body",
 
-                    for (row_index, item) in data.read().iter().enumerate() {
+                    for (row_index , item) in data.read().iter().enumerate() {
                         div {
                             class: "table-row",
                             key: "{key_fn(item)}",
@@ -368,44 +342,38 @@ pub fn Table<T: Clone + PartialEq + 'static>(
                                 e.prevent_default();
                             },
                             ondrop: move |_| {
-                                if let Some(dragged_idx) = *dragged_index.read() {  // 使用 * 解引用
+                                if let Some(dragged_idx) = *dragged_index.read() {
                                     on_row_index_change.call((dragged_idx, row_index as u32));
                                 }
-
                             },
                             ondragend: move |_| {
                                 dragged_index.set(None);
                             },
 
                             // draggable="true" dragstart:="start" dragover:="over($)" drop:="drop()"
-                            for (col_index, col) in columns.read().iter().enumerate() {
+                            for (col_index , col) in columns.read().iter().enumerate() {
                                 div {
                                     class: "table-cell ellipsis",
                                     style: format!(
                                         "display: inline-block;
-                                        height: {row_height}px;
-                                        line-height: {row_height}px;
-                                        width: {}px;
-                                        font-size: 14px;
-                                        padding: 0 4px;
-                                        border-right: 1px solid var(--myw-border);
-                                        border-bottom: 1px solid var(--myw-border);
-                                        background-color: var(--myw-bc);
-                                        border-left: {};",
+                                                                        height: {row_height}px;
+                                                                        line-height: {row_height}px;
+                                                                        width: {}px;
+                                                                        font-size: 16px;
+                                                                        padding: 0 4px;
+                                                                        border-right: 1px solid var(--myw-border);
+                                                                        border-bottom: 1px solid var(--myw-border);
+                                                                        background-color: var(--myw-bc);
+                                                                        border-left: {};",
                                         col.width,
-                                        if col_index == 0 {
-                                            "1px solid var(--myw-border)"
-                                        } else {
-                                            "none"
-                                        }
+                                        if col_index == 0 { "1px solid var(--myw-border)" } else { "none" },
                                     ),
                                     key: "{col.id}-{key_fn(item)}",
 
 
                                     // 当数据变化时，闭包会自动获取最新值
                                     {(col.renderer)(item)}
-                                },
-
+                                }
                             }
                         }
                     }
@@ -447,35 +415,34 @@ pub fn Modal(
                      color: var(--myw-color);",
             // 标题区域
             if let Some(title) = title {
-                h3 { style:"padding-left: 4px", "{title}",   Button{
-                    onclick: move |_| is_open.set(false),
-                    style:"float: right", border: "none",icon::Close {  }} }
+                h3 { style: "padding-left: 4px",
+                    "{title}"
+                    Button {
+                        onclick: move |_| is_open.set(false),
+                        style: "float: right",
+                        border: "none",
+                        icon::Close {}
+                    }
+                }
             }
-            div {
-                style: "padding: 4px",
+            div { style: "padding: 4px",
                 // 内容区域
                 {children}
             }
 
 
-            div {
-                style: "float: right",
+            div { style: "float: right",
                 Button {
                     onclick: move |_| {
                         on_confirm.call(true);
-                    }
-                    ,
+                    },
                     "确认"
-                },
+                }
 
-                Gap {w: "10"},
+                Gap { w: "10" }
                 // 关闭按钮
 
-                Button {
-                    border: "none",
-                    onclick: move |_| is_open.set(false),
-                    "取消"
-                }
+                Button { border: "none", onclick: move |_| is_open.set(false), "取消" }
             }
 
         }

@@ -1,12 +1,6 @@
-use std::fmt::Display;
 
-use crate::myw::{self, Tab};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
-use web_sys;
+use crate::myw::{self};
+use dioxus::prelude::*;
 mod components;
 mod firefox;
 mod input;
@@ -14,8 +8,8 @@ mod pc;
 #[component]
 pub fn Index() -> Element {
     let tabs = vec![
-        myw::Tab {
-            title: "自制组件".to_string(),
+         myw::Tab {
+                        title: "自制组件".to_string(),
             content: components::Index(),
         },
         myw::Tab {
@@ -35,12 +29,11 @@ pub fn Index() -> Element {
     rsx! {
         div {
             h1 {
-                "代码 ",
-                span {style: "font-size: 18px; display: inline-block;", "技术为自己服务"}
+                "代码 "
+                span { style: "font-size: 18px; display: inline-block;", "自己用的软件" }
 
-
-            },
-              myw::Tabset { tabs }
+            }
+            myw::Tabset { tabs }
         }
     }
 }

@@ -1,7 +1,6 @@
 use std::rc::Rc;
 
 use dioxus::prelude::*;
-use web_sys::console;
 
 use crate::myw::{self, TabColumn};
 // Example usage with different data types

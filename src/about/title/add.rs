@@ -1,12 +1,7 @@
-use std::fmt::Display;
 
 use super::models;
-use crate::myw::{self, Tab, TabColumn};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
+use crate::myw::{self};
+use dioxus::prelude::*;
 use web_sys;
 use web_sys::console;
 
@@ -49,20 +44,19 @@ pub fn Add(add_result: EventHandler<bool>) -> Element {
             }
         });
     };
-    rsx! { div {
-        input {
-            class: "myw-input",
-            placeholder: "请输入标题",
-            value: "{title}",
-            oninput: move |e| title.set(e.value()),
-        }
-        myw::Gap {w: "8"}
-        myw::Button {
-            onclick:handle_click,
-            "添加标题",
-        }
-        myw::Gap {}
+    rsx! {
+        div {
+            input {
+                class: "myw-input",
+                placeholder: "请输入标题",
+                value: "{title}",
+                oninput: move |e| title.set(e.value()),
+            }
+            myw::Gap { w: "8" }
+            myw::Button { onclick: handle_click, "添加标题" }
 
 
-    } }
+
+        }
+    }
 }

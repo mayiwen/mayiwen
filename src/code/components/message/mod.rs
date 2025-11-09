@@ -6,7 +6,7 @@ use crate::myw;
 
 #[component]
 pub fn Index() -> Element {
-    let mut is_open = use_signal(|| false);
+    let is_open = use_signal(|| false);
     let mut messages = consume_context::<Signal<Vec<myw::MessageItem>>>();
     rsx! {
            div {

@@ -1,12 +1,6 @@
-use std::fmt::Display;
 
-use crate::myw::{self, Tab};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h3;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
-use web_sys;
+use crate::myw::{self};
+use dioxus::prelude::*;
 mod button;
 mod icon;
 mod message;

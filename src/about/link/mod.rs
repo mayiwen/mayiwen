@@ -1,15 +1,9 @@
-use std::fmt::Display;
 use std::rc::Rc;
 
 use super::models;
-use crate::myw::{self, Tab, TabColumn};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
+use crate::myw::{self, TabColumn};
+use dioxus::prelude::*;
 use web_sys;
-use web_sys::console;
 
 mod add;
 mod del;
@@ -48,15 +42,12 @@ pub fn Index() -> Element {
     };
     rsx! {
         div {
-            h2 { "链接设置" }
-
+            myw::Gap { h: "8" }
+            h2 { "首页链接设置" }
+            myw::Gap { h: "8" }
             // 3. 添加加载状态处理
-            myw::Tabs {
-                tabs: nav_titles,
-                on_tab_change,
-                active_id: id
-            },
-            Link {id}
+            myw::Tabs { tabs: nav_titles, on_tab_change, active_id: id }
+            Link { id }
 
         }
     }
@@ -83,7 +74,7 @@ pub fn Link(id: Signal<u32>) -> Element {
         title_id: 0,
         index: 0,
     });
-    let mut columns = use_signal(|| {
+    let columns = use_signal(|| {
         vec![
             TabColumn {
                 width: 120,
@@ -132,7 +123,7 @@ pub fn Link(id: Signal<u32>) -> Element {
                 }),
             },
             TabColumn {
-                width: 90,
+                width: 120,
                 title: "操作",
                 id: "edit",
                 renderer: {
@@ -144,21 +135,27 @@ pub fn Link(id: Signal<u32>) -> Element {
                         let add_clone = link.clone();
                         let del_clone = link.clone();
                         rsx! {
-                            myw::Button {
-                                onclick: move |_| {
-                                    show_edit.set(true);
-                                    edit.set(add_clone.clone());
-                                },
-                                "修改"
+                            span {
+                                style: "display: inline-block; margin-top: 2px",
+                                myw::Button {
+                                    onclick: move |_| {
+                                        show_edit.set(true);
+                                        edit.set(add_clone.clone());
+                                    },
+                                    "修改"
+                                }
+
+                                myw::Gap{w: "8"}
+                                myw::Button {
+                                    onclick: move |_| {
+                                        show_del.set(true);
+                                        del.set(del_clone.clone());
+                                    },
+                                    "删除"
+                                }
+
                             }
-                            myw::Gap{w: "8"}
-                            myw::Button {
-                                onclick: move |_| {
-                                    show_del.set(true);
-                                    del.set(del_clone.clone());
-                                },
-                                "删除"
-                            }
+
                         }
                     })
                 },
@@ -233,60 +230,57 @@ pub fn Link(id: Signal<u32>) -> Element {
             });
         });
     rsx! {
-        div {
-            style: "width: 100%; padding: 2px",
+        div { style: "width: 100%;",
 
             // myw::Button {"添加链接"}
-            add::Index{id, ctrl_result: EventHandler::new(move |result: bool| {
-                println!("Received result: {}", result);
-                // props.add_result.call(true);
-                spawn(async move {
-                    let current_id = *id.read(); // 显式读取 id 值
-                    nav_link.set(vec![]);
-                    let links = super::data::fetch_nav_link(current_id).await;
-                    nav_link.set(links);
-                });
-            }),}
-
+            add::Index {
+                id,
+                ctrl_result: EventHandler::new(move |result: bool| {
+                    println!("Received result: {}", result);
+                    spawn(async move {
+                        let current_id = *id.read();
+                        nav_link.set(vec![]);
+                        let links = super::data::fetch_nav_link(current_id).await;
+                        nav_link.set(links);
+                    });
+                }),
+            }
+            myw::Gap { h: "8" }
             myw::Table {
-                columns: columns,
+                columns,
                 data: nav_link,
-                row_height: Some(32),
-                header_height: Some(32),
+                row_height: Some(40),
+                header_height: Some(40),
                 key_fn: |title| title.id.to_string(),
-                on_row_index_change : handle_row_moved,
+                on_row_index_change: handle_row_moved,
             }
             edit::Index {
                 show: show_edit,
                 data: edit,
                 ctrl: EventHandler::new(move |result: bool| {
                     println!("Received result: {}", result);
-                    // props.add_result.call(true);
                     spawn(async move {
-                        let current_id = *id.read(); // 显式读取 id 值
+                        let current_id = *id.read();
                         nav_link.set(vec![]);
                         show_edit.set(false);
                         let links = super::data::fetch_nav_link(current_id).await;
                         nav_link.set(links);
-
                     });
-                })
+                }),
             }
             del::Index {
                 show: show_del,
                 data: del,
                 ctrl: EventHandler::new(move |result: bool| {
                     println!("Received result: {}", result);
-                    // props.add_result.call(true);
                     spawn(async move {
-                        let current_id = *id.read(); // 显式读取 id 值
+                        let current_id = *id.read();
                         nav_link.set(vec![]);
                         show_del.set(false);
                         let links = super::data::fetch_nav_link(current_id).await;
                         nav_link.set(links);
-
                     });
-                })
+                }),
             }
 
 

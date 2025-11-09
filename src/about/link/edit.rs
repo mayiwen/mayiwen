@@ -1,14 +1,7 @@
-use std::fmt::Display;
 
 use super::models;
-use crate::myw::{self, Tab, TabColumn};
-use dioxus::events::KeyboardEvent;
-use dioxus::html::h1;
-use dioxus::{html::view, prelude::*};
-use keyboard_types::Key;
-use serde::{self, Deserialize, Serialize};
-use web_sys;
-use web_sys::console;
+use crate::myw::{self};
+use dioxus::prelude::*;
 // pub items: Signal<Vec<NavTitle>>,
 // pub add_result: EventHandler<bool>,
 #[component]
@@ -17,7 +10,7 @@ pub fn Index(
     data: Signal<models::NavLink>,
     ctrl: EventHandler<bool>,
 ) -> Element {
-    let mut messages = consume_context::<Signal<Vec<myw::MessageItem>>>();
+    let messages = consume_context::<Signal<Vec<myw::MessageItem>>>();
     let mut id: Signal<u32> = use_signal(|| 0);
     let mut title = use_signal(|| "".to_string());
     let mut src = use_signal(|| "".to_string());
